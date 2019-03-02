@@ -1,15 +1,9 @@
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ServiceStack;
 using ServiceStack.IO;
 using ServiceStack.Script;
 using ServiceStack.Text;
-using ServiceStack.Script;
 
 namespace SharpScript
 {

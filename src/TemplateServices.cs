@@ -4,11 +4,8 @@ using ServiceStack.Script;
 using ServiceStack.IO;
 using System.Threading.Tasks;
 using System;
-using ServiceStack.Web;
 using ServiceStack.OrmLite;
 using ServiceStack.Data;
-using ServiceStack.Script;
-using ServiceStack.Text;
 
 namespace SharpScript
 {

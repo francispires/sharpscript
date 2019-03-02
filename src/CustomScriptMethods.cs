@@ -9,7 +9,6 @@ using System;
 using ServiceStack.Redis;
 using ServiceStack.OrmLite;
 using System.Reflection;
-using ServiceStack.Script;
 
 namespace SharpScript
 {

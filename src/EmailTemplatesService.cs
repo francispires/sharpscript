@@ -1,9 +1,7 @@
 using System.Linq;
-using System.Collections.Generic;
 using ServiceStack;
 using ServiceStack.Script;
 using ServiceStack.IO;
-using ServiceStack.Script;
 
 namespace SharpScript
 {

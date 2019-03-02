@@ -1,14 +1,11 @@
 using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using ServiceStack;
 using ServiceStack.Script;
 using ServiceStack.IO;
 using ServiceStack.DataAnnotations;
 using System.Threading.Tasks;
-using ServiceStack.Script;
 
 namespace SharpScript
 {
