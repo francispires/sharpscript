@@ -103,19 +103,19 @@ order: 14
 <h4>Redis HTML</h4>
 
 <p>
-    <a href="http://redis-html.web-app.io">redis-html.web-app.io</a> is a version of Redis UI built using just SharpScript and Redis
+    <a href="http://redis-html.web-app.io">redis-html.web-app.io</a> is a version of Redis UI built using just #Script and Redis
     methods where all functionality is maintained in a single <a href="https://github.com/NetCoreWebApps/redis-html/blob/master/app/index.html">index.html</a>
     weighing under <b>&lt;200 LOC</b> including HTML and JavaScript. It's a good example of how the declarative style of programming
-    that SharpScript encourages a highly-readable code-base that packs a lot of functionality in a tiny foot print.
+    that #Script encourages a highly-readable code-base that packs a lot of functionality in a tiny foot print.
 </p>
 
 <h5>Server Generated HTML</h5>
 
 <p>
-    It's not immediately obvious when running this locally since both SharpScript and Redis are super fast, but Redis HTML was developed as
+    It's not immediately obvious when running this locally since both #Script and Redis are super fast, but Redis HTML was developed as
     a traditional Website where all HTML is server-generated and every search box key stroke and click on search results performs 
     a full-page reload. There's a slight sub-second delay that causes a noticeable flicker when hosted on the Internet due to network lag, but 
-    otherwise server-generated SharpScript Websites can enable a highly responsive UI (especially in Intranets) with great SEO and deep-linking
+    otherwise server-generated #Script Websites can enable a highly responsive UI (especially in Intranets) with great SEO and deep-linking
     and back-button support working as expected without the complexity of adopting a client-side JavaScript SPA framework and build-system.
 </p>
 

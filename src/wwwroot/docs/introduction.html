@@ -4,7 +4,7 @@ order: 2
 -->
 
 <p>
-    SharpScript is a simple and elegant, <a href="/docs/methods">highly-extensible</a>, <a href="/docs/sandbox">sandboxed</a>, 
+    #Script is a simple and elegant, <a href="/docs/methods">highly-extensible</a>, <a href="/docs/sandbox">sandboxed</a>, 
     high-performance <a href="/docs/page-formats">general-purpose</a> templating engine for .NET 4.5 and .NET Core. 
     It's designed from the ground-up to be incrementally adoptable where its basic usage is simple enough 
     for non-technical users to use whilst it progressively enables access to more power and functionality allowing it to scale up to 
@@ -66,7 +66,7 @@ order: 2
 
 
 <p>
-    Typically you'll want to use SharpScript to render entire pages which are sourced from its configured
+    Typically you'll want to use #Script to render entire pages which are sourced from its configured
     <a href="https://docs.servicestack.net/virtual-file-system">Virtual File System</a> which uses an In Memory Virtual 
     File System by default that we can programmatically populate:
 </p>
@@ -92,7 +92,7 @@ order: 2
 {{ 'gfm/introduction/06.md' | githubMarkdown }}
 
 <p>
-    All I/O within SharpScript is non-blocking, but if you're evaluating an adhoc script or using the default In Memory Virtual FileSystem 
+    All I/O within #Script is non-blocking, but if you're evaluating an adhoc script or using the default In Memory Virtual FileSystem 
     there's no I/O so you can safely block to get the generated output with:
 </p>
 
@@ -107,7 +107,7 @@ order: 2
 <p>
     There's no forced special centralized folders like <em>/Views</em> or <em>/Views/Shared</em> required to store layouts or share partials or 
     artificial "Areas" concept to isolate website sections. Different websites or sections are intuitively grouped into different 
-    folders and SharpScript automatically resolves the closest layout it finds for each page. Cascading resolution also applies to 
+    folders and #Script automatically resolves the closest layout it finds for each page. Cascading resolution also applies to 
     including files or partial pages where you can use just its name to resolve the closest one, or an absolute path from the 
     <em>WebRootPath</em> to include a specific partial or file from a different folder.
 </p>
@@ -127,7 +127,7 @@ order: 2
 {{ 'gfm/introduction/08.md' | githubMarkdown }}
 
 <p>
-    The intent of SharpScript code should be clear even if it's the first time reading it. From left-to-right we can deduce that it
+    The intent of #Script code should be clear even if it's the first time reading it. From left-to-right we can deduce that it
      retrieves a url from the quote table, downloads its contents of and converts it to markdown before replacing the text "Razor" and
      "2010" and displaying the <em>raw</em> non-HTML encoded html output. 
 </p>
@@ -139,9 +139,9 @@ order: 2
     that is handed off to MVC to execute the View inside the default Layout.
 </p>
 
-<h5>Implementation using SharpScript</h5>
+<h5>Implementation using #Script</h5>
 <p>
-    What does SharpScript do? lets step through the first filter:
+    What does #Script do? lets step through the first filter:
 </p>
 
 {{ "live-template" | partial({ output:'no-scroll', rows:1, template: "{{ 'select url from quote where id= @id' | dbScalar({ id:1 }) | htmlLink }}" }) }}
@@ -153,7 +153,7 @@ order: 2
     to execute all queries asynchronously, otherwise if using an RDBMS whose ADO.NET Provider doesn't support async you can register the
     <a href="https://github.com/ServiceStack/ServiceStack.OrmLite/blob/master/src/ServiceStack.OrmLite/DbScripts.cs">DbScripts</a>
     to execute each DB request synchronously without paying for any <i>pseudo-async</i> overhead, in each case the exact same code executes
-    the most optimal ADO.NET APIs. SharpScript also benefits from using the much faster 
+    the most optimal ADO.NET APIs. #Script also benefits from using the much faster 
     <a href="https://github.com/ServiceStack/ServiceStack.OrmLite">OrmLite</a> and also saves on the abstraction cost from generating a 
     parameterized SQL Statement from a Typed Expression-based API.    
 </p>
@@ -177,7 +177,7 @@ order: 2
 <p>
     <em>urlContents</em> is a <a href="/docs/methods#block-methods">Block Method</a> which instead of returning a value writes its 
     response to the OutputStream it's given. But then how could we convert it to Markdown if it's already written to the Response Stream?
-    SharpScript analyzes the Expression's AST to determine if there's any filters remaining, if there is it gives the <em>urlContents</em> 
+    #Script analyzes the Expression's AST to determine if there's any filters remaining, if there is it gives the <em>urlContents</em> 
     Block filter a <em>MemoryStream</em> to write to, then forwards its buffered output to the next filter. Since they don't return values, 
     the only thing that can come after a Block Filter are other Block filters or <a href="/docs/transformers">Stream Transformers</a>. 
     <em>markdown</em> is one such <a href="/docs/transformers#filter-transformers">Filter Transformer</a> which takes in a stream of Markdown 
@@ -207,14 +207,14 @@ order: 2
     So whilst it conceptually looks like each filter is transforming large buffered strings inside every filter, the expression is 
     inspected to utilize the most efficient implementation allowable. At the same time filters are not statically bound to 
     any implementation so you could for instance <a href="/docs/methods#registering-methods">insert a Custom Filter</a> before the Default 
-    Filters containing the same name and arguments count to have SharpScript execute your custom script methods instead, all whilst the  
+    Filters containing the same name and arguments count to have #Script execute your custom script methods instead, all whilst the  
     script source code and intent remains untouched.
 </p>
 
 <h5>Intent-based code is easier to augment</h5>
 <p>
     If it was later discovered that some URLs were slow or rate-limited and you needed to introduce caching, your original C# code
-    would require a fair amount of rework, in SharpScript you can simply add <em>WithCache</em> to call the
+    would require a fair amount of rework, in #Script you can simply add <em>WithCache</em> to call the
     <a href="/docs/protected-scripts#includeurlwithcache">urlContentsWithCache</a> filter to return locally cached contents 
     on subsequent requests.
 </p>
@@ -224,7 +224,7 @@ order: 2
 <h4>Simplified Language</h4>
 
 <p>
-    As there's very little ceremony in SharpScript, a chain of filters looks like it's using its own DSL to accomplish each task and
+    As there's very little ceremony in #Script, a chain of filters looks like it's using its own DSL to accomplish each task and
     given <a href="/docs/methods#registering-methods">implementing and registering custom filters </a> is trivial you're 
     encouraged to write the intent of your code first then implement any filters that are missing to realize its intent. Once 
     you've captured the intent of what you want to do, it's less likely to ever need to change, focus is instead on 
@@ -232,7 +232,7 @@ order: 2
 </p>
 
 <p>    
-    To improve readability and make it more approachable, SharpScript aims to normalize the mechanics of the underlying implementation from 
+    To improve readability and make it more approachable, #Script aims to normalize the mechanics of the underlying implementation from 
     the code's intent so you can use the same syntax to access an argument, e.g. <em>{{ pass: arg }}</em> as you would a filter without 
     arguments  <em>{{ pass: now }}</em> and just like JavaScript you can use <em>obj.Property</em> syntax to access both a public property 
     on a Type or an entry in a Dictionary.

@@ -13,7 +13,7 @@ order: 24
 </p>
 
 <p>
-    Sharp Apps leverages SharpScript to develop entire content-rich, data-driven websites without needing to write any C#, 
+    Sharp Apps leverages #Script to develop entire content-rich, data-driven websites without needing to write any C#, 
     compile projects or manually refresh pages - resulting in the easiest and fastest way to develop Web Apps in .NET!
 </p>
 
@@ -21,9 +21,9 @@ order: 24
 
 <p>
     Not having to write any C# code or perform any app builds dramatically reduces the cognitive overhead and conceptual knowledge 
-    required for development where the only thing front-end Web developers need to know is <a href="/docs/syntax">SharpScript's familiar syntax</a> 
+    required for development where the only thing front-end Web developers need to know is <a href="/docs/syntax">#Script's familiar syntax</a> 
     and what <a href="/docs/filters-reference">methods are available</a> to call. 
-    Because of SharpScript's JavaScript compatibility, developing a Website with SharpScript will be instantly familiar to JavaScript 
+    Because of #Script's JavaScript compatibility, developing a Website with #Script will be instantly familiar to JavaScript 
     devs despite calling and binding directly to .NET APIs behind the scenes.
 </p>
 
@@ -71,7 +71,7 @@ Then you can run <em>web list</em> to see which apps are available to install:
 <pre class="sh"><code>1. redis           Redis Admin Viewer developed as Vue Client Single Page App
 2. bare            Bootstrap + jQuery multi-page Website with dynamic Menu Navigation + API pages
 3. chat            Highly extensible App with custom AppHost leveraging OAuth + SSE for real-time Chat
-4. plugins         Extend SharpApps with Plugins, Filters, ServiceStack Services and other C# extensions
+4. plugins         Extend Sharp Apps with Plugins, Filters, ServiceStack Services and other C# extensions
 5. blog            Minimal multi-user Twitter OAuth blogging platform that creates living powerful pages
 6. rockwind-aws    Rockwind Cloud Web App on AWS
 7. rockwind-azure  Rockwind Cloud Web App on Azure
@@ -232,7 +232,7 @@ Usage: web install &lt;name&gt;</code></pre>
 
 <p>
     The other primary benefit is that this is an example of a website that can be maintained by employees who don't have any
-    programming experience as SharpScript in their basic form are intuitive and approachable to non-developers, e.g: 
+    programming experience as #Script in their basic form are intuitive and approachable to non-developers, e.g: 
     The title of each page is maintained as metadata HTML comments:
 </p>
 
@@ -242,7 +242,7 @@ title: About Us
 </code></pre>
 
 <p>
-    SharpScript's syntax is also the ideal way to convey variable substitution, e.g: <em>&lt;title&gt;{{ pass: title }}&lt;/title&gt;</em> 
+    #Script's syntax is also the ideal way to convey variable substitution, e.g: <em>&lt;title&gt;{{ pass: title }}&lt;/title&gt;</em> 
     and even embedding a partial reads like english <em>{{ pass: 'menu' | partial }}</em> which is both intuitive and works well 
     with GUI HTML designers.
 </p>
@@ -293,7 +293,7 @@ webRoot ~/../bare</code></pre>
 <p>
     For the Redis Browser Web App, we wanted to implement an App that was an ideal candidate for a Single Page App but constrain ourselves
     to do all HTML rendering on the server and have each interaction request a full-page reload to see how a traditional server-generated
-    Web App feels like with the performance of .NET Core 2.1 and SharpScript. We're pleasantly surprised with the result as when 
+    Web App feels like with the performance of .NET Core 2.1 and #Script. We're pleasantly surprised with the result as when 
     the App is run locally the responsiveness is effectively indistinguishable from an Ajax App. When hosted on the Internet 
     there is a sub-second delay which causes a noticeable flicker but it still retains a pleasant UX that's faster than most websites.
 </p>
@@ -328,7 +328,7 @@ webRoot ~/../bare</code></pre>
     all Template and JavaScript Source Code in <b>&lt; 200 lines</b> which also includes all as server logic as it doesn't rely on any 
     back-end Services and just uses the <a href="/docs/redis-scripts">Redis Scripts</a> to interface with Redis directly.
     The <a href="https://github.com/NetCoreWebApps/redis-html/blob/master/app/index.html">source code</a> also serves as a good 
-    demonstration of the declarative coding style that SharpScript encourages that in addition to being highly-readable requires orders 
+    demonstration of the declarative coding style that #Script encourages that in addition to being highly-readable requires orders 
     of magnitude less code than our previous Redis JavaScript SPA's with a comparable feature-set.
 </p>
 
@@ -361,7 +361,7 @@ redis.connection localhost:6379</code></pre>
 </div>
 
 <p>
-    Whilst the above server-generated HTML Redis UI shows how you can easily develop traditional Web Apps using SharpScript, we've also
+    Whilst the above server-generated HTML Redis UI shows how you can easily develop traditional Web Apps using #Script, we've also
     rewritten the Redis UI as a Single Page App which is the more suitable choice for an App like this as it provides a more
     optimal and responsive UX by only loading the HTML page once on Startup then utilizes Ajax to only download and update 
     the incremental parts of the App's UI that needs changing.
@@ -380,7 +380,7 @@ redis.connection localhost:6379</code></pre>
 <h4>Simple Vue App</h4>
 
 <p>
-    SharpScript also provides a great development experience for Single Page Apps which for the most part gets out of your way letting you 
+    #Script also provides a great development experience for Single Page Apps which for the most part gets out of your way letting you 
     develop the Single Page App as if it were a static <em>.html</em> file, but also benefits from the flexibility of a 
     dynamic web page when needed. 
 </p>
@@ -413,7 +413,7 @@ redis.connection localhost:6379</code></pre>
 
 <p>
     Whilst most of <a href="https://github.com/NetCoreWebApps/Redis/blob/master/app/index.html">index.html</a> is a static Vue 
-    app, SharpScript is leveraged to generate the body of the <em>&lt;redis-info/&gt;</em> Component on the initial home page render:
+    app, #Script is leveraged to generate the body of the <em>&lt;redis-info/&gt;</em> Component on the initial home page render:
 </p>
 
 {{ 'gfm/sharp-apps/08.md' | githubMarkdown }}
@@ -426,7 +426,7 @@ redis.connection localhost:6379</code></pre>
 <h4>Server Handling</h4>
 
 <p>
-    Another area SharpScript is used is to handle the HTTP POST where it calls the <em>redisChangeConnection</em> filter to change 
+    Another area #Script is used is to handle the HTTP POST where it calls the <em>redisChangeConnection</em> filter to change 
     the current Redis connection before rendering the 
     <a href="https://github.com/NetCoreWebApps/Redis/blob/master/app/connection-info.html">connection-info.html</a> partial with the 
     current connection info:
@@ -511,7 +511,7 @@ redis.connection localhost:6379</code></pre>
     <a href="http://rockwind-sqlite.web-app.io/northwind/customers?country=Germany">form to filter results</a>, multi-nested 
     <a href="http://rockwind-sqlite.web-app.io/northwind/customer?id=ALFKI">detail pages</a> and 
     <a href="http://rockwind-sqlite.web-app.io/northwind/order?id=10643">deep-linking</a> for quickly navigating between 
-    referenced data. SharpScript is also a great solution for rapidly developing Web APIs where the 
+    referenced data. #Script is also a great solution for rapidly developing Web APIs where the 
     <a href="https://github.com/NetCoreWebApps/Rockwind/blob/master/app/api/customers.html">/api/customers.html</a>
     API Page below:
 </p>
@@ -683,8 +683,8 @@ defaultFileCacheExpirySecs     60</code></pre>
 <h4>Multi-RDBMS SQL</h4>
 
 <p>
-    As SharpScript is unable to use a Typed ORM like <a href="https://github.com/ServiceStack/ServiceStack.OrmLite">OrmLite</a>
-    to hide the nuances of each database, we need to be a bit more diligent in SharpScript to use parameterized SQL that works across 
+    As #Script is unable to use a Typed ORM like <a href="https://github.com/ServiceStack/ServiceStack.OrmLite">OrmLite</a>
+    to hide the nuances of each database, we need to be a bit more diligent in #Script to use parameterized SQL that works across 
     multiple databases by using the 
     <a href="/docs/filters-reference?nameContains=sql&amp;tab=db-scripts"><em>sql*</em> DB Filters</a> to avoid using RDBMS-specific
     SQL syntax. The 
@@ -979,7 +979,7 @@ CustomPlugin { ShowProcessLinks: true }
     includes removing MVC and Razor dependencies and configuration, extracting its 
     <a href="https://github.com/NetCoreWebApps/Chat/tree/master/app/_layout.html">_layout.html</a> and 
     converting <a href="https://github.com/NetCoreWebApps/Chat/tree/master/app/index.html">index.html</a>
-    to use SharpScript from its original 
+    to use #Script from its original 
     <a href="https://github.com/NetCoreApps/Chat/blob/master/src/Chat/wwwroot/default.cshtml">default.cshtml</a>.
     It's also been enhanced with the ability to evaluate scripts from the Chat window, as seen in the screenshot above.
 </p>

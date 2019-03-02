@@ -45,7 +45,7 @@ Templates and Dynamic API Pages to implement all of its functionality.</p>
 <div class="highlight highlight-text-html-handlebars"><pre><span class="pl-c1">{{</span> <span class="pl-v">content</span>  | <span class="pl-e"><span class="pl-v">evalTemplate</span></span>({<span class="pl-e"><span class="pl-v">use</span></span>:{<span class="pl-e"><span class="pl-v">plugins</span></span>:<span class="pl-s"><span class="pl-pds">'</span>MarkdownScriptPlugin<span class="pl-pds">'</span></span><span class="pl-c1">}}</span>) | assignTo:response }}
 <span class="pl-c1">{{</span> <span class="pl-v">response</span> | <span class="pl-e"><span class="pl-v">return</span></span>({ <span class="pl-e"><span class="pl-v">contentType</span></span>:<span class="pl-s"><span class="pl-pds">'</span>text/plain<span class="pl-pds">'</span></span> }) <span class="pl-c1">}}</span></pre></div>
 <p>The preview API above is what provides the new <a href="http://blog.web-app.io/" rel="nofollow">Blog Web App's</a> Live Preview feature where it will render any
-SharpScript provided in the <strong>content</strong> Query String or HTTP Post Form Data, e.g:</p>
+#Script provided in the <strong>content</strong> Query String or HTTP Post Form Data, e.g:</p>
 <ul>
 <li><a href="http://blog.web-app.io/preview?content=%7B%7B10%7Ctimes%7Cselect:%7Bpow(index,2)%7D,%7D%7D" rel="nofollow">/preview?content={{10|times|select:{pow(index,2)},}}</a></li>
 </ul>
@@ -103,11 +103,11 @@ the results:</p>
   <span class="pl-smi">response</span>:          <span class="pl-smi">post</span>,
   <span class="pl-smi">format</span>:            <span class="pl-s">'json'</span>,
   <span class="pl-smi">contentType</span>:       <span class="pl-s">'application/json'</span>,
-  <span class="pl-s">'X-Powered-By'</span>:    <span class="pl-s">'SharpScript'</span>,
+  <span class="pl-s">'X-Powered-By'</span>:    <span class="pl-s">'#Script'</span>,
 }) </pre></div>
 <p>Any other unknown arguments like <strong>'X-Powered-By'</strong> are returned as HTTP Response Headers.</p>
 <p>Returning the <code>httpResult</code> above behaves similarly to customizing a HTTP response using return arguments:</p>
-<div class="highlight highlight-text-html-handlebars"><pre><span class="pl-c1">{{</span> <span class="pl-v">post</span> | <span class="pl-e"><span class="pl-v">return</span></span>({ <span class="pl-e"><span class="pl-v">format</span></span>:<span class="pl-s"><span class="pl-pds">'</span>json<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>X-Powered-By<span class="pl-pds">'</span></span>:<span class="pl-s"><span class="pl-pds">'</span>SharpScript<span class="pl-pds">'</span></span> }) <span class="pl-c1">}}</span></pre></div>
+<div class="highlight highlight-text-html-handlebars"><pre><span class="pl-c1">{{</span> <span class="pl-v">post</span> | <span class="pl-e"><span class="pl-v">return</span></span>({ <span class="pl-e"><span class="pl-v">format</span></span>:<span class="pl-s"><span class="pl-pds">'</span>json<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>X-Powered-By<span class="pl-pds">'</span></span>:<span class="pl-s"><span class="pl-pds">'</span>#Script<span class="pl-pds">'</span></span> }) <span class="pl-c1">}}</span></pre></div>
 <p>Using the explicit <code>httpResult</code> filter is useful for returning a custom HTTP Response without a Response Body, e.g. the <strong>New Post</strong> page
 uses <code>httpFilter</code> to
 <a href="https://github.com/NetCoreWebApps/Blog/blob/e8bb7249192c5797348ced091ad5fd434db9a619/app/posts/new.html#L33">redirect back to the Users posts page</a>

@@ -4,16 +4,16 @@ order: 11
 -->
 
 <p>
-    One of the goals of SharpScript is that its defaults should be safe enough to be able to execute arbitrary scripts by untrusted 3rd parties.
+    One of the goals of #Script is that its defaults should be safe enough to be able to execute arbitrary scripts by untrusted 3rd parties.
     Given this constraint, only default scripts are pre-registered which contain a comprehensive set of filters we deem safe for use by anyone.
-    Other methods available in SharpScript which are useful to have in a server-generated website environment but we don't want 3rd Parties to 
+    Other methods available in #Script which are useful to have in a server-generated website environment but we don't want 3rd Parties to 
     access are filters in 
     <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/Methods/ProtectedScripts.cs">ProtectedScripts.cs</a>.    
 </p>
 
 <p>
     <em>ProtectedScripts</em> are not pre-registered when creating a new <em>ScriptContext</em> but they are pre-registered when 
-    registering the <em>SharpPagesFeature</em> ServiceStack Plugin as that's designed to use SharpScript within a View Engine where access
+    registering the <em>SharpPagesFeature</em> ServiceStack Plugin as that's designed to use #Script within a View Engine where access
     to its context is limited to the server's Web Application. 
 </p>
 
@@ -103,10 +103,10 @@ order: 11
 <pre class="cs"><code>{{ url | includeUrl({ dataType: 'json' }) }}</code></pre>
 
 <p>
-    Send data as <b>form-urlencoded</b> in a HTTP PUT Request with a <b>SharpScript</b> User-Agent:
+    Send data as <b>form-urlencoded</b> in a HTTP PUT Request with a <b>#Script</b> User-Agent:
 </p>
 
-<pre class="cs"><code>{{ url | includeUrl({ method:'PUT', data: { id: 1, name: 'foo' }, userAgent:"SharpScript" }) }}</code></pre>
+<pre class="cs"><code>{{ url | includeUrl({ method:'PUT', data: { id: 1, name: 'foo' }, userAgent:"#Script" }) }}</code></pre>
 
 <p>
     Send data as JSON in a HTTP POST request and Accept JSON response:
