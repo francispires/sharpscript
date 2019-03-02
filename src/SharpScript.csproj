@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>TemplatePages</AssemblyName>
-    <PackageId>TemplatePages</PackageId>
+    <AssemblyName>SharpScript</AssemblyName>
+    <PackageId>SharpScript</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

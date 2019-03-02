@@ -4,4 +4,4 @@ Comprehensive Documentation complete with Live Interactive Examples on using Sha
 
 > Live Demo: [sharpscript.net](http://sharpscript.net)
 
-[![](https://raw.githubusercontent.com/NetCoreApps/TemplatePages/master/src/wwwroot/assets/img/screenshot.png)](https://github.com/ServiceStack/sharpscript/tree/master/src)
+[![](https://raw.githubusercontent.com/ServiceStack/sharpscript/master/src/wwwroot/assets/img/screenshot.png)](https://github.com/ServiceStack/sharpscript/tree/master/src)

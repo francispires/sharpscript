@@ -78,10 +78,10 @@ namespace SharpScript
 
                     var htmlBytes = RepositoryContext == null 
                         ? await ApiBaseUrl.CombineWith("markdown", "raw")
-                            .PostBytesToUrlAsync(bytes, contentType:MimeTypes.PlainText, requestFilter:x => x.UserAgent = "TemplatePages")
+                            .PostBytesToUrlAsync(bytes, contentType:MimeTypes.PlainText, requestFilter:x => x.UserAgent = "SharpScript")
                         : await ApiBaseUrl.CombineWith("markdown")
                             .PostBytesToUrlAsync(new Dictionary<string,string> { {"text", bytes.FromUtf8Bytes() }, {"mode", Mode}, {"context", RepositoryContext} }.ToJson().ToUtf8Bytes(), 
-                                contentType:MimeTypes.Json, requestFilter:x => x.UserAgent = "TemplatePages");
+                                contentType:MimeTypes.Json, requestFilter:x => x.UserAgent = "SharpScript");
 
                     var headerBytes = "<div class=\"gfm\">".ToUtf8Bytes();
                     var footerBytes = "</div>".ToUtf8Bytes();
