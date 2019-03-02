@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using ServiceStack;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 using ServiceStack.IO;
 using System.Threading.Tasks;
 using System;
 using ServiceStack.Web;
 using ServiceStack.OrmLite;
 using ServiceStack.Data;
+using ServiceStack.Script;
 using ServiceStack.Text;
 
-namespace TemplatePages
+namespace SharpScript
 {
     [Route("/pages/eval")]
-    public class EvaluateTemplates : IReturn<string>
+    public class EvaluateScripts : IReturn<string>
     {
         public Dictionary<string,string> Files { get; set; }
         public Dictionary<string,string> Args { get; set; }
@@ -21,7 +22,7 @@ namespace TemplatePages
     }
 
     [Route("/template/eval")]
-    public class EvaluateTemplate
+    public class EvaluateScript
     {
         public string Template { get; set; }
     }
@@ -42,11 +43,11 @@ namespace TemplatePages
     [ReturnExceptionsInJson]
     public class TemplateServices : Service
     {
-        public async Task<string> Any(EvaluateTemplates request)
+        public async Task<string> Any(EvaluateScripts request)
         {
-            var context = new TemplateContext {
-                TemplateFilters = {
-                    new TemplateProtectedFilters(),
+            var context = new ScriptContext {
+                ScriptMethods = {
+                    new ProtectedScripts(),
                 },
                 ExcludeFiltersNamed = { "fileWrite","fileAppend","fileDelete","dirDelete" }
             }.Init();
@@ -66,14 +67,14 @@ namespace TemplatePages
             return await pageResult.RenderToStringAsync(); // render to string so [ReturnExceptionsInJson] can detect Exceptions and return JSON
         }
 
-        public async Task<string> Any(EvaluateTemplate request)
+        public async Task<string> Any(EvaluateScript request)
         {
-            var context = new TemplateContext {
-                TemplateFilters = {
-                    new TemplateDbFilters(),
-                    new TemplateAutoQueryFilters(),
-                    new TemplateServiceStackFilters(),
-                    new CustomTemplateFilters(),
+            var context = new ScriptContext {
+                ScriptMethods = {
+                    new DbScripts(),
+                    new AutoQueryScripts(),
+                    new ServiceStackScripts(),
+                    new CustomScriptMethods(),
                 }
             };
             //Register any dependencies filters need:

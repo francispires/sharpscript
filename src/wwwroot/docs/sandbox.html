@@ -4,31 +4,31 @@ order: 23
 -->
 
 <p>
-    Another useful feature of Templates is that it operates within a controlled sandbox where each <em>TemplateContext</em> instance is 
-    isolated and defines the entire execution environment on which Templates are executed within as such it should be safe to run
-    Templates from untrusted 3rd Party sources as they're confined to what's available within their allowed <em>TemplateContext</em> instance. 
+    Another useful feature of SharpScript is that it operates within a controlled sandbox where each <em>ScriptContext</em> instance is 
+    isolated and defines the entire execution environment on which scripts are executed within as such it should be safe to run
+    scripts from untrusted 3rd Party sources as they're confined to what's available within their allowed <em>ScriptContext</em> instance. 
 </p>
 
-<h4>TemplateContext</h4>
+<h4>ScriptContext</h4>
 
 <p>
-    The only functionality a new <em>TemplateContext</em> instance has access to are the 
-    <a href="/docs/default-filters">safe set of default filters</a> and the <a href="/docs/transformers#htmlencode">htmlencode Filter Transformer</a>.
-    Templates can't call methods on instances or have any other way to invoke a method unless it's explicitly registered. 
+    The only functionality a new <em>ScriptContext</em> instance has access to are the 
+    <a href="/docs/default-scripts">safe set of default scripts</a> and the <a href="/docs/transformers#htmlencode">htmlencode Filter Transformer</a>.
+    SharpScript can't call methods on instances or have any other way to invoke a method unless it's explicitly registered. 
 </p>
 
 <p>
-    If running a template from an untrusted source we recommend running them within a new <em>TemplateContext</em> instance so they're 
-    kept isolated from any other <em>TemplateContext</em> instance. Context's are cheap to create, so there won't be a noticeable delay when 
-    executing in a new instance but they're used to cache compiled lambda expressions which will need to be recreated if executing Templates
-    in new TemplateContext instances. For improved performance you can instead have all untrusted templates use the same
-    TemplateContext instance that way they're able to reuse compiled expressions.
+    If running a script from an untrusted source we recommend running them within a new <em>ScriptContext</em> instance so they're 
+    kept isolated from any other <em>ScriptContext</em> instance. Context's are cheap to create, so there won't be a noticeable delay when 
+    executing in a new instance but they're used to cache compiled lambda expressions which will need to be recreated if executing script
+    in new ScriptContext instances. For improved performance you can instead have all untrusted templates use the same
+    ScriptContext instance that way they're able to reuse compiled expressions.
 </p>
 
-<h4 id="remove-default-filters">Remove default filters</h4>
+<h4 id="remove-default-scripts">Remove default scripts</h4>
 
 <p>
-    If you want to start from a clean slate, the default filters can be removed by clearing the <em>TemplateFilters</em> collection:
+    If you want to start from a clean slate, the default scripts can be removed by clearing the <em>ScriptMethods</em> collection:
 </p>
 
 {{ 'gfm/sandbox/01.md' | githubMarkdown }}
@@ -43,15 +43,15 @@ order: 23
 {{ 'gfm/sandbox/02.md' | githubMarkdown }}
 
 <blockquote>
-    Filters can also be disabled on an individual <em>PageResult</em> by populating its <em>ExcludeFiltersNamed</em> collection.
+    Script Methods can also be disabled on an individual <em>PageResult</em> by populating its <em>ExcludeFiltersNamed</em> collection.
 </blockquote>
 
 <h4>Instance creation and MaxQuota</h4>
 
 <p>
-    The only instances that can be created within templates are what's allowed in 
+    The only instances that can be created within scripts are what's allowed in 
     <a href="/docs/syntax#javascript-literals">JavaScript Literals</a> and the
-    <a href="/docs/default-filters#generation">Generation and Repeating Filters</a>. To limit any potential CPU and GC abuse any default filters
+    <a href="/docs/default-scripts#generation">Generation and Repeating Filters</a>. To limit any potential CPU and GC abuse any default scripts
     that can generate instances are limited to a <em>MaxQuota</em> of <b>10000</b> iterations. This quota can be modified with:    
 </p>
 

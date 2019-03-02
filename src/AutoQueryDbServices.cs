@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ServiceStack;
 
-namespace TemplatePages
+namespace SharpScript
 {
     // The entire QueryCustomers AutoQuery Service (no implementation required)
     public class QueryCustomers : QueryDb<Customer> 

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using ServiceStack;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
@@ -9,10 +9,11 @@ using System;
 using ServiceStack.Redis;
 using ServiceStack.OrmLite;
 using System.Reflection;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
-    public class CustomTemplateFilters : TemplateFilter
+    public class CustomScriptMethods : ScriptMethods
     {
         public Dictionary<int, KeyValuePair<string, string>> DocsIndex { get; } = new Dictionary<int, KeyValuePair<string, string>>();
         public Dictionary<int, KeyValuePair<string, string>> LinqIndex { get; } = new Dictionary<int, KeyValuePair<string, string>>();
@@ -85,7 +86,7 @@ namespace TemplatePages
             return to;
         }
 
-        public async Task includeContentFile(TemplateScopeContext scope, string virtualPath)
+        public async Task includeContentFile(ScriptScopeContext scope, string virtualPath)
         {
             var file = HostContext.VirtualFiles.GetFile(virtualPath);
             if (file == null)
@@ -108,24 +109,24 @@ namespace TemplatePages
         {
             switch(name)
             {
-                case nameof(TemplateDefaultFilters):
-                    return typeof(TemplateDefaultFilters);
-                case nameof(TemplateHtmlFilters):
-                    return typeof(TemplateHtmlFilters);
-                case nameof(TemplateProtectedFilters):
-                    return typeof(TemplateProtectedFilters);
-                case nameof(TemplateInfoFilters):
-                    return typeof(TemplateInfoFilters);
-                case nameof(TemplateRedisFilters):
-                    return typeof(TemplateRedisFilters);
-                case nameof(TemplateDbFilters):
-                    return typeof(TemplateDbFilters);
-                case nameof(TemplateDbFiltersAsync):
-                    return typeof(TemplateDbFiltersAsync);
-                case nameof(TemplateServiceStackFilters):
-                    return typeof(TemplateServiceStackFilters);
-                case nameof(TemplateAutoQueryFilters):
-                    return typeof(TemplateAutoQueryFilters);
+                case nameof(DefaultScripts):
+                    return typeof(DefaultScripts);
+                case nameof(HtmlScripts):
+                    return typeof(HtmlScripts);
+                case nameof(ProtectedScripts):
+                    return typeof(ProtectedScripts);
+                case nameof(InfoScripts):
+                    return typeof(InfoScripts);
+                case nameof(RedisScripts):
+                    return typeof(RedisScripts);
+                case nameof(DbScripts):
+                    return typeof(DbScripts);
+                case nameof(DbScriptsAsync):
+                    return typeof(DbScriptsAsync);
+                case nameof(ServiceStackScripts):
+                    return typeof(ServiceStackScripts);
+                case nameof(AutoQueryScripts):
+                    return typeof(AutoQueryScripts);
             }
 
             throw new NotSupportedException("Unknown Filter: " + name);
@@ -133,21 +134,21 @@ namespace TemplatePages
 
         public IRawString filterLinkToSrc(string name)
         {
-            const string prefix = "https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/Filters/";
+            const string prefix = "https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/Methods/";
 
             var type = GetFilterType(name);
-            var url = type == typeof(TemplateDefaultFilters)
+            var url = type == typeof(DefaultScripts)
                 ? prefix
-                : type == typeof(TemplateHtmlFilters) || type == typeof(TemplateProtectedFilters)
+                : type == typeof(HtmlScripts) || type == typeof(ProtectedScripts)
                     ? $"{prefix}{type.Name}.cs"
-                    : type == typeof(TemplateInfoFilters)
-                    ? "https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/TemplateInfoFilters.cs"
-                    : type == typeof(TemplateRedisFilters)
-                    ? "https://github.com/ServiceStack/ServiceStack.Redis/blob/master/src/ServiceStack.Redis/TemplateRedisFilters.cs"
-                    : type == typeof(TemplateDbFilters) || type == typeof(TemplateDbFiltersAsync)
+                    : type == typeof(InfoScripts)
+                    ? "https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/InfoScripts.cs"
+                    : type == typeof(RedisScripts)
+                    ? "https://github.com/ServiceStack/ServiceStack.Redis/blob/master/src/ServiceStack.Redis/RedisScripts.cs"
+                    : type == typeof(DbScripts) || type == typeof(DbScriptsAsync)
                     ? $"https://github.com/ServiceStack/ServiceStack.OrmLite/tree/master/src/ServiceStack.OrmLite/{type.Name}.cs"
-                    : type == typeof(TemplateServiceStackFilters)
-                    ? "https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/TemplateServiceStackFilters.cs"
+                    : type == typeof(ServiceStackScripts)
+                    ? "https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/ServiceStackScripts.cs"
                     : prefix;
 
             return new RawString($"<a href='{url}'>{type.Name}.cs</a>");
@@ -160,9 +161,9 @@ namespace TemplatePages
             var to = filters
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.GetParameters().Count())
-                .Where(x => x.DeclaringType != typeof(TemplateFilter) && x.DeclaringType != typeof(object))
+                .Where(x => x.DeclaringType != typeof(ScriptMethods) && x.DeclaringType != typeof(object))
                 .Where(m => !m.IsSpecialName)                
-                .Select(x => FilterInfo.Create(x));
+                .Select(FilterInfo.Create);
 
             return to.ToArray();
         }
@@ -179,7 +180,7 @@ namespace TemplatePages
         public static FilterInfo Create(MethodInfo mi)
         {
             var paramNames = mi.GetParameters()
-                .Where(x => x.ParameterType != typeof(TemplateScopeContext))
+                .Where(x => x.ParameterType != typeof(ScriptScopeContext))
                 .Select(x => x.Name)
                 .ToArray();
 

@@ -1,9 +1,9 @@
-<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">TemplateWithBlock</span> : <span class="pl-en">TemplateBlock</span>
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">WithScriptBlock</span> : <span class="pl-en">ScriptBlock</span>
 {
     <span class="pl-k">public</span> <span class="pl-k">override</span> <span class="pl-k">string</span> <span class="pl-smi">Name</span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>with<span class="pl-pds">"</span></span>;
 
     <span class="pl-k">public</span> <span class="pl-k">override</span> <span class="pl-k">async</span> <span class="pl-en">Task</span> <span class="pl-en">WriteAsync</span>(
-        <span class="pl-en">TemplateScopeContext</span> <span class="pl-smi">scope</span>, <span class="pl-en">PageBlockFragment</span> <span class="pl-smi">block</span>, <span class="pl-en">CancellationToken</span> <span class="pl-smi">token</span>)
+        <span class="pl-en">ScriptScopeContext</span> <span class="pl-smi">scope</span>, <span class="pl-en">PageBlockFragment</span> <span class="pl-smi">block</span>, <span class="pl-en">CancellationToken</span> <span class="pl-smi">token</span>)
     {
         <span class="pl-k">var</span> <span class="pl-smi">result</span> <span class="pl-k">=</span> <span class="pl-k">await</span> <span class="pl-smi">block</span>.<span class="pl-smi">Argument</span>.<span class="pl-en">GetJsExpressionAndEvaluateAsync</span>(<span class="pl-smi">scope</span>,
             <span class="pl-smi">ifNone</span>: () <span class="pl-k">=&gt;</span> <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">NotSupportedException</span>(<span class="pl-s"><span class="pl-pds">"</span>'with' block does not have a valid expression<span class="pl-pds">"</span></span>));
@@ -22,13 +22,13 @@
         }
     }
 }</pre></div>
-<p>This enables the <code>with</code> block to also evaluate async responses like the async results returned in <a href="/docs/db-filters">async Database filters</a>,
+<p>This enables the <code>with</code> block to also evaluate async responses like the async results returned in <a href="/docs/db-scripts">async Database scripts</a>,
 it's also able to evaluate custom else statements for rendering different results based on alternate conditions, e.g:</p>
-<div class="highlight highlight-source-js"><pre>{{#<span class="pl-k">with</span> <span class="pl-en">dbSingle</span>(<span class="pl-s"><span class="pl-pds">"</span>select * from Person where id = @id<span class="pl-pds">"</span></span>, { id }) }}
-    Hi {{Name}}, your Age is {{Age}}.
-{{<span class="pl-k">else</span> <span class="pl-k">if</span> id <span class="pl-k">==</span> <span class="pl-c1">0</span>}}
+<div class="highlight highlight-text-html-handlebars"><pre><span class="pl-c1">{{</span><span class="pl-c1">#with</span> <span class="pl-v">dbSingle</span>(<span class="pl-s"><span class="pl-pds">"</span>select * from Person where id = @id<span class="pl-pds">"</span></span>, { <span class="pl-e"><span class="pl-v">id</span></span> }) <span class="pl-c1">}}</span>
+    Hi <span class="pl-c1">{{</span><span class="pl-v">Name</span><span class="pl-c1">}}</span>, your Age is <span class="pl-c1">{{</span><span class="pl-v">Age</span><span class="pl-c1">}}</span>.
+<span class="pl-c1">{{</span><span class="pl-c1">else</span><span class="pl-c1"> <span class="pl-v">if</span> id</span> == 0<span class="pl-c1">}}</span>
     id is required.
-{{<span class="pl-k">else</span>}}
-    No person <span class="pl-k">with</span> id {{id}} exists.
-{{<span class="pl-k">/</span><span class="pl-k">with</span>}}</pre></div>
+<span class="pl-c1">{{</span><span class="pl-c1">else</span><span class="pl-c1">}}</span>
+    No person with id <span class="pl-c1">{{</span><span class="pl-v">id</span><span class="pl-c1">}}</span> exists.
+<span class="pl-c1">{{</span><span class="pl-c1">/with</span><span class="pl-c1">}}</span></pre></div>
 </div>

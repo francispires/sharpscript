@@ -4,13 +4,13 @@ order: 0
 -->
 
 <p>
-    All LINQ Examples are executed using the same TemplateContext instance below:
+    All LINQ Examples are executed using the same ScriptContext instance below:
 </p>
 
 <pre><code>
-    LinqContext = new TemplateContext {
+    LinqContext = new ScriptContext {
         Args = {
-            [TemplateConstants.DefaultDateFormat] = "yyyy/MM/dd",
+            [ScriptConstants.DefaultDateFormat] = "yyyy/MM/dd",
             ["products"] = TemplateQueryData.Products,
             ["customers"] = TemplateQueryData.Customers,
             ["comparer"] = new CaseInsensitiveComparer(),

@@ -4,15 +4,15 @@ order: 5
 -->
 
 <p>
-    All data and objects made available to templates are done so using arguments. There are a number of different layers in 
+    All data and objects made available to scripts are done so using arguments. There are a number of different layers in 
     which arguments can be defined, each shadowing the outer scope as it gets closer to the call-site where the argument is accessed,
     behaving similarly to properties defined in a JavaScript prototype chain.
 </p>
 
-<h4>TemplateContext Arguments</h4>
+<h4>ScriptContext Arguments</h4>
 
 <p>
-    Essentially this can be thought of as where global variables are maintained, anything defined here is available to every template, partial, filter, etc:
+    Essentially this can be thought of as where global variables are maintained, anything defined here is available to every page, partial, method, block, etc:
 </p>
 
 {{ 'gfm/arguments/01.md' | githubMarkdown }}
@@ -21,7 +21,7 @@ order: 5
 
 <p>
     All pages can define their own arguments within the header of each page, for <b>.html</b> files they are defined within HTML Comments
-    <em>&lt;!-- --&gt;</em> with each argument on a new line delimited by a colon, e.g:
+    <em>&lt;!-- --&gt;</em> with each argument on a new line delimited by an (optional) colon, e.g:
 </p>
 
 {{ "live-pages" | partial(
@@ -32,7 +32,7 @@ order: 5
         { 
             '_layout.html': '<!--
 arg: 2
-arg2: 2
+arg2 2
 -->
 
 layout args: <b>{{ arg }}, {{ arg2 }}</b> 

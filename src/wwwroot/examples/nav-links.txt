@@ -2,8 +2,8 @@
     { 
         links: { 
             '/docs/model-view-controller': 'MVC', 
-            '/docs/view-engine': 'View Engine', 
-            '/docs/code-pages': 'Code Pages'
+            '/docs/sharp-pages': 'Sharp Pages', 
+            '/docs/code-pages': 'Sharp Code Pages'
         } 
     }) 
 }}

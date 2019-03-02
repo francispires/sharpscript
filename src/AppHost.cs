@@ -5,21 +5,21 @@ using System.Linq;
 using System.Collections;
 using ServiceStack;
 using ServiceStack.IO;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 using ServiceStack.Text;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using ServiceStack.Configuration;
 using Funq;
 
-namespace TemplatePages
+namespace SharpScript
 {
     public class AppHost : AppHostBase
     {
         public AppHost()
-            : base("Template Pages", typeof(TemplateServices).Assembly) { }
+            : base("Sharp Pages", typeof(TemplateServices).Assembly) { }
 
-        public TemplateContext LinqContext;
+        public ScriptContext LinqContext;
 
         public override void Configure(Container container)
         {
@@ -57,11 +57,11 @@ namespace TemplatePages
                     HostContext.Cache, TimeSpan.FromMinutes(10)))
             );
 
-            var customFilters = new CustomTemplateFilters();
-            Plugins.Add(new TemplatePagesFeature {
-                TemplateFilters = { 
+            var customFilters = new CustomScriptMethods();
+            Plugins.Add(new SharpPagesFeature {
+                ScriptMethods = { 
                     customFilters,
-                    new TemplateDbFiltersAsync()
+                    new DbScriptsAsync()
                 },
                 Args = {
                     ["products"] = TemplateQueryData.Products
@@ -72,7 +72,7 @@ namespace TemplatePages
             });
 
             AfterInitCallbacks.Add(host => {
-                var feature = GetPlugin<TemplatePagesFeature>();
+                var feature = GetPlugin<SharpPagesFeature>();
 
                 var files = GetVirtualFileSources().First(x => x is FileSystemVirtualFiles);
                 foreach (var file in files.GetDirectory("docs").GetAllMatchingFiles("*.html"))
@@ -102,9 +102,9 @@ namespace TemplatePages
                     }
                 }
 
-                LinqContext = new TemplateContext {
+                LinqContext = new ScriptContext {
                     Args = {
-                        [TemplateConstants.DefaultDateFormat] = "yyyy/MM/dd",
+                        [ScriptConstants.DefaultDateFormat] = "yyyy/MM/dd",
                         ["products"] = TemplateQueryData.Products,
                         ["customers"] = TemplateQueryData.Customers,
                         ["comparer"] = new CaseInsensitiveComparer(),

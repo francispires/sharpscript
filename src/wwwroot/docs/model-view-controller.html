@@ -4,25 +4,25 @@ order: 20
 -->
 
 <p>
-    Simplicity is a driving goal behind the design of Templates where in its simplest form it's usable by non-programmers who just
+    Simplicity is a driving goal behind the design of SharpScript where in its simplest form it's usable by non-programmers who just
     know HTML as they're able to embed dynamic content in their HTML pages using intuitive Mustache syntax and with the 
-    intuitive way in how <a href="/docs/view-engine">View Engine works</a> they're able to develop entire content-heavy websites 
+    intuitive way in how <a href="/docs/sharp-pages">Sharp Pages</a> works they're able to develop entire content-heavy websites 
     without needing to write any code.
 </p>
 
 <p>
     As requirements become more demanding you can use progressively advanced features to enable greater flexibility and 
-    functionality whilst still retaining using Templates to generate the HTML view with access to existing layouts and partials.
+    functionality whilst still retaining using scripts to generate the HTML view with access to existing layouts and partials.
 </p>
 
 <p>
     The first option to enable functionality is to reuse the rich functionality available in Services to populate the data
-    required by your view. To do this in ServiceStack add a reference to the <em>ITemplatePages</em> dependency which was registered 
-    by <em>TemplateContext</em>, then return a <em>PageResult</em> containing the <em>.html</em> page you want to 
+    required by your view. To do this in ServiceStack add a reference to the <em>ISharpPages</em> dependency which was registered 
+    by <em>ScriptContext</em>, then return a <em>PageResult</em> containing the <em>.html</em> page you want to 
     render as well as any additional arguments you want available in the page:    
 </p>
 
-<h4><a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/CustomerServices.cs">CustomerServices.cs</a></h4>
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/CustomerServices.cs">CustomerServices.cs</a></h4>
 
 {{ 'gfm/model-view-controller/01.md' | githubMarkdown }}
 
@@ -40,7 +40,7 @@ order: 20
     <em>{{ pass: CustomerId }}</em> instead of the more verbose <em>{{ pass: model.CustomerId }}</em> as used in:
 </p>
 
-<h4><a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/wwwroot/examples/customer.html">examples/customer.html</a></h4>
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/examples/customer.html">examples/customer.html</a></h4>
 
 {{ 'gfm/model-view-controller/03.md' | githubMarkdown }}
 

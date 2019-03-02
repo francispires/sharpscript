@@ -4,7 +4,7 @@ order: 15
 -->
 
 <p>
-    Templates uses Exceptions for error flow control flow that by default will fail fast by emitting the Exception details at 
+    SharpScript uses Exceptions for error flow control flow that by default will fail fast by emitting the Exception details at 
     the point where the error occured before terminating the Stream and rethrowing the Exception which lets you for 
     instance catch the Exception in Unit Tests.
 </p>
@@ -13,7 +13,7 @@ order: 15
 
 <p>
     You can instead choose to handle exceptions and prevent them from short-circuiting page rendering by assigning them to an 
-    argument using either the <em>assignError</em> filter which will capture any subsequent Exceptions thrown on the page:
+    argument using either the <em>assignError</em> method which will capture any subsequent Exceptions thrown on the page:
 </p>
 
 {{ 'live-template' | partial({ rows:3, template: `{{ 'ex' | assignError }}
@@ -21,21 +21,21 @@ order: 15
 {{ ex | select: { it.Message } }}` }) }}
 
 <p>
-    Alternatively it can be specified on each call-site where it will capture the Exception thrown by the filter:
+    Alternatively it can be specified on each call-site where it will capture the Exception thrown by the method:
 </p>
 
 {{ 'live-template' | partial({ rows:3, template: `{{ 'An error!' | throw({ assignError: 'ex' }) }}
 {{ ex | select: { it.Message } }}` }) }}
 
 <blockquote>
-    An easy way to prettify errors in Web Pages is to use <a href="/docs/html-filters#htmlerror">HTML Error Filters</a>.
+    An easy way to prettify errors in Web Pages is to use <a href="/docs/html-scripts#htmlerror">HTML Error Scripts</a>.
 </blockquote>
 
 <h4>Unhandled Exceptions Behavior</h4>
 
 <p>
-    If Exceptions are unassigned they're considered to be unhandled. The default behavior for <em>TemplateContext</em> is to 
-    rethrow Exceptions, but as ServiceStack's <em>TemplatePagesFeature</em> is executed within the context of a HTTP Server 
+    If Exceptions are unassigned they're considered to be unhandled. The default behavior for <em>ScriptContext</em> is to 
+    rethrow Exceptions, but as ServiceStack's <em>SharpPagesFeature</em> is executed within the context of a HTTP Server 
     it's default is configured to:
 </p>
 
@@ -43,8 +43,8 @@ order: 15
 
 <p>
     Which instead captures any unhandled Exceptions in <em>PageResult.LastFilterError</em> and continues rendering the page except
-    it skips evaluating any subsequent filters and instead only evaluates the filters which handle errors, 
-    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/TemplateConfig.cs">currently</a>:
+    it skips evaluating any subsequent methods and instead only evaluates the methods which handle errors, 
+    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/ScriptConfig.cs">currently</a>:
 </p>
 
 {{#raw}}
@@ -52,30 +52,30 @@ order: 15
     <tr>
         <th>ifError</th>
         <td>
-            Only execute the filter if there's an error: <br>
+            Only execute the expression if there's an error: <br>
             <em>{{ ifError | select: FAIL! { it.Message } }}</em>
         </td>
     </tr>
     <tr>
         <th>lastError</th>
         <td>
-            Returns the last error on the page or <em>null</em> if there was no error, that's passed to the next filter:<br>
+            Returns the last error on the page or <em>null</em> if there was no error, that's passed to the next method:<br>
             <em>{{ lastError | ifExists | select: FAIL! { it.Message } }}</em>
         </td>
     </tr>
     <tr>
-        <th><a href="/docs/html-filters#htmlerror">htmlError</a></th>
+        <th><a href="/docs/html-scripts#htmlerror">htmlError</a></th>
         <td>
-            Display detailed <em>htmlErrorDebug</em> when in <a href="http://docs.servicestack.net/debugging#debugmode">DebugMode</a>
+            Display detailed <em>htmlErrorDebug</em> when in <a href="https://docs.servicestack.net/debugging#debugmode">DebugMode</a>
             otherwise display a more appropriate end-user <em>htmlErrorMessage</em>.
         </td>
     </tr>
     <tr>
-        <th><a href="/docs/html-filters#htmlerrormessage">htmlErrorMessage</a></th>
+        <th><a href="/docs/html-scripts#htmlerrormessage">htmlErrorMessage</a></th>
         <td>Display the Exception Message</td>
     </tr>
     <tr>
-        <th><a href="/docs/html-filters#htmlerrordebug">htmlErrorDebug</a></th>
+        <th><a href="/docs/html-scripts#htmlerrordebug">htmlErrorDebug</a></th>
         <td>Display a detailed Exception</td>
     </tr>
 </table>
@@ -84,13 +84,13 @@ order: 15
 <p>
     This behavior provides the optimal UX for developers and end-users as HTML Pages with Exceptions are still rendered well-formed 
     whilst still being easily able to display a curated error messages for end-users without developers needing to guard against 
-    executing filters when Exceptions occur.
+    executing methods when Exceptions occur.
 </p>
 
 <h4>Controlling Unhandled Exception Behavior</h4>
 
 <p>
-    We can also enable this behavior on a per-page basis using the <em>skipExecutingFiltersOnError</em> filter:
+    We can also enable this behavior on a per-page basis using the <em>skipExecutingFiltersOnError</em> method:
 </p>
 
 {{ 'live-template' | partial({ rows:5, template: `{{ skipExecutingFiltersOnError }}
@@ -100,14 +100,14 @@ order: 15
 {{ htmlErrorMessage }}` }) }}
 
 <p>
-    Here we can see that any normal filters after exceptions are never evaluated unless they're specifically for handling Errors.
+    Here we can see that any normal methods after exceptions are never evaluated unless they're specifically for handling Errors.
 </p>
 
-<h4>Continue Executing Filters on Unhandled Exceptions</h4>
+<h4>Continue Executing Methods on Unhandled Exceptions</h4>
 
 <p>
-    We can also specify that we want to continue executing filters in which case you'll need to manually guard filters you want to
-    control the execution of using the <em>ifNoError</em> or <em>ifError</em> filters:
+    We can also specify that we want to continue executing methods in which case you'll need to manually guard methods you want to
+    control the execution of using the <em>ifNoError</em> or <em>ifError</em> methods:
 </p>
 
 {{ 'live-template' | partial({ rows:8, template: `{{ continueExecutingFiltersOnError }}
@@ -121,7 +121,7 @@ order: 15
 <h4>Accessing Page Exceptions</h4>
 
 <p>
-    The last Exception thrown are accessible using the <em>lastError*</em> filters:
+    The last Exception thrown are accessible using the <em>lastError*</em> methods:
 </p>
 
 {{ 'live-template' | partial({ rows:6, template: `{{ continueExecutingFiltersOnError }}
@@ -134,13 +134,13 @@ order: 15
 <h4>Throwing Exceptions</h4>
 
 <p>
-    We've included a few of the popular Exception Types, filters prefixed with <em>throw</em> always throws the Exceptions below:
+    We've included a few of the popular Exception Types, methods prefixed with <em>throw</em> always throws the Exceptions below:
 </p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Filter</th>
+            <th>Method</th>
             <th>Exception</th>
         </tr>
     </thead>
@@ -181,19 +181,19 @@ order: 15
 </table>
 
 <blockquote>
-    You can extend this list with your own custom filters, see the 
-    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/Filters/TemplateDefaultFilters.ErrorHandling.cs">Error Handling Filters</a>    
+    You can extend this list with your own custom methods, see the 
+    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/Methods/DefaultScripts.ErrorHandling.cs">Error Handling Methods</a>    
     for examples.
 </blockquote>
 
 <p>
-    These filters will only throw if a condition is met:
+    These methods will only throw if a condition is met:
 </p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Filter</th>
+            <th>Method</th>
             <th>Exception</th>
         </tr>
     </thead>
@@ -227,7 +227,7 @@ order: 15
 <h4>Ensure Argument Helpers</h4>
 
 <p>
-    The <em>ensureAll*</em> filters assert the state of multiple arguments where it will either throw an Exception unless
+    The <em>ensureAll*</em> methods assert the state of multiple arguments where it will either throw an Exception unless
     all the arguments meet the condition or return the Object Dictionary if all conditions are met:
 </p>
 
@@ -238,7 +238,7 @@ ensureAllArgsNotEmpty:
 {{ ex | htmlErrorMessage }}` }) }}
 
 <p>
-    The <em>ensureAny*</em> filters only requires one of the arguments meet the condition to return the Object Dictionary:
+    The <em>ensureAny*</em> methods only requires one of the arguments meet the condition to return the Object Dictionary:
 </p>
 
 {{ 'live-template' | partial({ rows:5, template: `{{ '' | assignTo: empty }}
@@ -251,9 +251,9 @@ ensureAnyArgsNotEmpty:
 
 <p>
     The Exception Types below are reserved for Exceptions that should never happen, such as incorrect usage of an API where it would've 
-    resulted in a compile error in C#. When these Exceptions are thrown in a filter or a page they'll immediately short-circuit execution of
+    resulted in a compile error in C#. When these Exceptions are thrown in a method or a page they'll immediately short-circuit execution of
     the page and write the Exception details to the output. 
-    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/TemplateConfig.cs">The Fatal Exceptions include</a>:
+    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/ScriptConfig.cs">The Fatal Exceptions include</a>:
 </p>
 
 <ul>
@@ -267,16 +267,16 @@ ensureAnyArgsNotEmpty:
 <p>
     The <em>OnExpressionException</em> delegate in 
     <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/PageFormat.cs">Page Formats</a>
-    are able to control how Exceptions in filter expressions are rendered where if preferred exceptions can be rendered in-line
-    in the filter expression where they occured with:
+    are able to control how Exceptions in template expressions are rendered where if preferred exceptions can be rendered in-line
+    in the template expression where they occured with:
 </p>
 
 {{ 'gfm/error-handling/02.md' | githubMarkdown }}
     
 <p>
     The <em>OnExpressionException</em> can also suppress Exceptions from being displayed by capturing any naked Exception Types registered in 
-    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/TemplateConfig.cs">TemplateConfig.CaptureAndEvaluateExceptionsToNull</a>
-    and evaluate the filter expression to <em>null</em> which by default will suppress the following naked Exceptions thrown in filters:
+    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/ScriptConfig.cs">TemplateConfig.CaptureAndEvaluateExceptionsToNull</a>
+    and evaluate the template expression to <em>null</em> which by default will suppress the following naked Exceptions thrown in methods:
 </p>
 
 <ul>
@@ -284,29 +284,29 @@ ensureAnyArgsNotEmpty:
     <li><em>ArgumentNullException</em></li>
 </ul>
 
-<h4>Implementing Filter Exceptions</h4>
+<h4>Implementing Method Exceptions</h4>
 
 <p>
-    In order for your own Filter Exceptions to participate in the above Template Error Handling they'll need to be wrapped in an
-    <em>StopFilterExecutionException</em> including both the Template's <em>scope</em> and an optional <b>options</b> object 
+    In order for your own Method Exceptions to participate in the above Script Error Handling they'll need to be wrapped in an
+    <em>StopFilterExecutionException</em> including both the Script's <em>scope</em> and an optional <b>options</b> object 
     which is used to check if the <em>assignError</em> binding was provided so it can automatically populate it with the Exception.
 </p>
 
 <p>
-    The easiest way to Implement Exception handling in filters is to call a managed function which catches all Exceptions and 
+    The easiest way to Implement Exception handling in methods is to call a managed function which catches all Exceptions and 
     throws them in a <em>StopFilterExecutionException</em> as seen in OrmLite's 
-    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite/blob/master/src/ServiceStack.OrmLite/TemplateDbFilters.cs">TemplateDbFilters</a>:
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite/blob/master/src/ServiceStack.OrmLite/DbScripts.cs">DbScripts</a>:
 </p>
 
 {{ 'gfm/error-handling/03.md' | githubMarkdown }}
 
 <p>
-    The overloads are so the filters can be called without specifying any filter options.
+    The overloads are so the methods can be called without specifying any method options.
 </p>
 
 <p>
     For more examples of different error handling features and strategies checkout:
-    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/tests/ServiceStack.WebHost.Endpoints.Tests/TemplateTests/TemplateErrorHandlingTests.cs">TemplateErrorHandlingTests.cs</a>
+    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/tests/ServiceStack.WebHost.Endpoints.Tests/ScriptTests/ErrorHandlingTests.cs">ErrorHandlingTests.cs</a>
 </p>
 
 {{ "doc-links" | partial({ order }) }}

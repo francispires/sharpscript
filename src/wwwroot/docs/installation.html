@@ -4,39 +4,33 @@ order: 1
 -->
 
 <p>
-    ServiceStack Templates is available in the <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a> NuGet Package:
+    SharpScript is available for <b>.NET Core</b> or <b>.NET v4.5+</b> Framework projects from the <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a> NuGet Package:
 </p>
 
 <pre><code>PM> Install-Package ServiceStack.Common</code></pre>
 
 <p>
-    Or if using .NET Core:
+    It's also available for <a href="https://docs.servicestack.net/templates-corefx">ASP.NET Core Apps on the .NET Framework</a> by installing:
 </p>
 
 <pre><code>PM> Install-Package ServiceStack.Common.Core</code></pre>
 
 <p>
-    You're now all set to play with ServiceStack Templates! Start by creating and rendering a dynamic page:
+    You're now all set to have fun with SharpScript! Start by evaluating a script:
 </p>
 
 {{ 'gfm/installation/01.md' | githubMarkdown }}
 
 {{ "live-template" | partial({ template: "The time is now: {{ now | dateFormat('HH:mm:ss') }}" }) }}
 
-<p>
-    Evaluating ad hoc templates can also be condensed down to a single line:
-</p>
-
-{{ 'gfm/installation/02.md' | githubMarkdown }}
-
 <h4>Configure with ServiceStack</h4>
 
 <p>
-    To use Template Pages as a <a href="/docs/view-engine">HTML View Engine in ServiceStack</a>, 
-    register the <em>TemplatePagesFeature</em> plugin:
+    To utilize <a href="/docs/sharp-pages">Sharp Pages in ServiceStack</a>, 
+    register the <em>SharpPagesFeature</em> plugin:
 </p>
 
-{{ 'gfm/installation/03.md' | githubMarkdown }}
+{{ 'gfm/installation/02.md' | githubMarkdown }}
 
 <h2 id="starter-projects">Starter Project Templates</h2>
 
@@ -48,7 +42,7 @@ order: 1
 
 <p>
     Create a new <a href="https://github.com/NetCoreTemplates/templates">Templates Website</a> .NET Core 2.1 App with 
-    <a href="http://docs.servicestack.net/dotnet-new">dotnet-new</a>:
+    <a href="https://docs.servicestack.net/dotnet-new">dotnet-new</a>:
 </p>
 
 <div class="gfm">
@@ -65,9 +59,9 @@ order: 1
 
 <p>
     For ASP.NET v4.5 projects create a new <b>ServiceStack ASP.NET Templates with Bootstrap</b> from the VS.NET Templates in
-    <a href="http://docs.servicestack.net/templates-overview#servicestackvs-vsnet-extension">ServiceStackVS VS.NET Extension</a>
+    <a href="https://docs.servicestack.net/templates-overview#servicestackvs-vsnet-extension">ServiceStackVS VS.NET Extension</a>
     to create an ASP.NET v4.5 Project using
-    <a href="http://docs.servicestack.net/create-your-first-webservice#step-4-exploring-the-servicestack-solution">ServiceStack's recommended project structure</a>:    
+    <a href="https://docs.servicestack.net/create-your-first-webservice#step-4-exploring-the-servicestack-solution">ServiceStack's recommended project structure</a>:    
 </p>
 
 <p>
@@ -76,16 +70,16 @@ order: 1
     </a>
 </p>
 
-<h2 id="webapp-templates">WebApp Project Templates</h2>
+<h2 id="webapp-templates">SharpApp Project Templates</h2>
 
 <p>
-    <a href="/docs/web-apps">Web Apps</a> is our revolutionary new approach to dramatically simplify .NET Wep App development by using ServiceStack 
+    <a href="/docs/sharp-apps">Sharp Apps</a> is our revolutionary new approach to dramatically simplify .NET Wep App development by using ServiceStack 
     Templates to build entire Websites in a live real-time development workflow without any C# and requiring no development environment, 
     IDE’s or build tools - dramatically reducing the cognitive overhead and conceptual knowledge required for developing .NET Core Websites in 
     a powerful dynamic templating language that's simple, safe and intuitive enough that Web Designers and Content Authors can use. 
 </p>
 
-<h4 id="bare-webapp">Bare WebApp</h4>
+<h4 id="bare-webapp">Bare SharpApp</h4>
 
 <p>
     To start with a simple and mininal website, create a new <a href="https://github.com/NetCoreTemplates/bare-webapp">bare-webapp</a> project template:
@@ -99,10 +93,10 @@ order: 1
     This creates a multi-page Bootstrap Website with Menu navigation that's ideal for content-heavy Websites.
 </p>
 
-<h3 id="parcel-webapp">Parcel WebApp</a></h3>
+<h3 id="parcel-webapp">Parcel SharpApp</a></h3>
 
 <p>
-    For more sophisticated JavaScript Web Apps we recommended starting with the 
+    For more sophisticated JavaScript Sharp Apps we recommended starting with the 
     <a href="https://github.com/NetCoreTemplates/parcel-webapp">parcel-webapp</a> project template:
 </p>
 
@@ -111,27 +105,27 @@ order: 1
 <pre class="sh"><code>$ dotnet-new parcel-webapp ProjectName</code></pre>
 
 <p>
-    This provides a simple and powerful starting template for developing modern JavaScript .NET Core Web Apps utilizing the 
+    This provides a simple and powerful starting template for developing modern JavaScript .NET Core Sharp Apps utilizing the 
     zero-configuration <a href="https://parceljs.org">Parcel</a> bundler to enable a rapid development workflow with access to 
     best-of-class web technologies like TypeScript that's managed by pre-configured
     <a href="https://github.com/NetCoreTemplates/parcel-webapp#client">npm scripts</a> to handle its entire dev workflow.
 </p>
 
-<h3 id="webapp-examples">WebApp Examples</h3>
+<h3 id="webapp-examples">SharpApp Examples</h3>
 
 <p>
-    View our Example Web Apps to explore different features and see examples of how easy it is to create with Web Apps:
+    View our Example Sharp Apps to explore different features and see examples of how easy it is to create with Sharp Apps:
 </p>
 
 <ul>
-    <li><a href="/docs/web-apps#about-bare-webapp">About Bare Web App</a> - Simple Content Website with Menu navigation</li>
-    <li><a href="/docs/web-apps#about-parcel-webapp">About Parcel WebApp</a> - Simple Integrated Parcel SPA Website utilizing TypeScript</li>
-    <li><a href="/docs/web-apps#redis-html">Redis HTML</a> - A Redis Admin Viewer developed as server-generated HTML Website</li>
-    <li><a href="/docs/web-apps#redis-vue">Redis Vue</a> - A Redis Admin Viewer developed as Vue Client Single Page App</li>
-    <li><a href="/docs/web-apps#rockwind">Rockwind</a> - Combination of mult-layout Rockstars website + data-driven Nortwhind Browser</li>
-    <li><a href="/docs/web-apps#plugins">Plugins</a> - Extend WebApps with Plugins, Filters, ServiceStack Services and other C# extensions</li>
-    <li><a href="/docs/web-apps#chat">Chat</a> - Highly extensible App with custom AppHost that leverages OAuth + Server Events for real-time Chat</li>
-    <li><a href="/docs/web-apps#blog">Blog</a> - A minimal, multi-user Twitter OAuth blogging platform that can create living, powerful pages</li>
+    <li><a href="/docs/sharp-apps#about-bare-webapp">About Bare SharpApp</a> - Simple Content Website with Menu navigation</li>
+    <li><a href="/docs/sharp-apps#about-parcel-webapp">About Parcel SharpApp</a> - Simple Integrated Parcel SPA Website utilizing TypeScript</li>
+    <li><a href="/docs/sharp-apps#redis-html">Redis HTML</a> - A Redis Admin Viewer developed as server-generated HTML Website</li>
+    <li><a href="/docs/sharp-apps#redis-vue">Redis Vue</a> - A Redis Admin Viewer developed as Vue Client Single Page App</li>
+    <li><a href="/docs/sharp-apps#rockwind">Rockwind</a> - Combination of mult-layout Rockstars website + data-driven Nortwhind Browser</li>
+    <li><a href="/docs/sharp-apps#plugins">Plugins</a> - Extend SharpApps with Plugins, Filters, ServiceStack Services and other C# extensions</li>
+    <li><a href="/docs/sharp-apps#chat">Chat</a> - Highly extensible App with custom AppHost that leverages OAuth + Server Events for real-time Chat</li>
+    <li><a href="/docs/sharp-apps#blog">Blog</a> - A minimal, multi-user Twitter OAuth blogging platform that can create living, powerful pages</li>
 </ul>
 
 {{ "doc-links" | partial({ order }) }}

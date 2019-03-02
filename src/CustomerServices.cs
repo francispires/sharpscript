@@ -1,7 +1,7 @@
 using ServiceStack;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
     [Route("/customers/{Id}")]
     public class ViewCustomer
@@ -11,7 +11,7 @@ namespace TemplatePages
 
     public class CustomerServices : Service
     {
-        public ITemplatePages Pages { get; set; }
+        public ISharpPages Pages { get; set; }
 
         public object Any(ViewCustomer request) =>
             new PageResult(Pages.GetPage("examples/customer")) {

@@ -1,41 +1,74 @@
-<!--
-title: ServiceStack Templates
--->
+
+<h1 style="font-size:80px;color:#000;text-align:center;margin:-20px 0 40px 0;">
+    <img src="/assets/img/logo.svg" alt="SharpScript" style="width:90px;height:90px">Script
+</h1>
 
 <p>
-    At its core ServiceStack Templates is a <a href="/docs/introduction#simplicity-end-to-end">simple</a>, fast, and extremely versatile 
-    dynamic templating language for .NET and .NET Core that utilizes an <a href="/docs/syntax">Expressive Syntax</a> to compose high-level 
-    functionality using .NET <a href="/docs/filters">filters</a> and <a href="/docs/arguments">arguments</a>.
+    <em>SharpScript</em> is a <a href="/docs/introduction#simplicity-end-to-end">simple</a>, fast, highly versatile and
+    embeddable scripting language for .NET Core and .NET Apps that utilizes a 
+    <a href="/docs/syntax">familiar expressive Syntax</a> 
+    to enable dynamic scripting of .NET Apps via controlled access to pluggable 
+    <a href="/docs/methods">methods</a> and <a href="/docs/arguments">arguments</a>
+    within a sandbox environment - ensuring scripts are encapsulated and developed using clean, reusable and testable components. 
 </p>
+
+<h5 id="language">Language</h5>
+
+<p>
+    The language itself a familiar combination of
+    <a href="/docs/expression-viewer">JavaScript expressions</a> contained within Template Expressions popularized in    
+    <a href="https://vuejs.org/v2/guide/filters.html">Vue.js filters</a> and 
+    <a href="https://angular.io/guide/template-syntax#template-expression-operators">Angular's Template Expressions</a>
+    whilst statements adopt <a href="/docs/blocks">Handlebars block helpers</a> syntax. The language is also highly extensible which is pre-configured
+    <a href="/docs/default-scripts">comprehensive suite of safe methods</a> and blocks by default, but are all registered via its 
+    rich plugin functionality which can be completely removed or "shadowed" (aka overridden) where it could be used to form the basis of your
+    own completely different DSL.
+</p>
+
+<h5 id="ecosystem">Ecosystem</h5>
+
+<p>
+    In addition to the language, SharpScript includes a surrounding ecosystem of rich functionality adapting SharpScript
+    to power a number of fun and exciting scenarios. E.g. Scripts are lazily loaded from its Virtual File System
+    which can be configured to use any of the <a href="https://docs.servicestack.net/virtual-file-system">available Virtual File Systems</a>
+    and is what enables <a href="/docs/sharp-apps#pure-cloud-apps">Pure Cloud Apps</a> where <b>entire</b> Sharp Apps could be hosted within
+    your AWS S3 Bucket or Azure Blob Storage.
+</p>
+
+<h5 id="dynamic">Dynamic</h5>
 
 <p>
     It's small, lightweight footprint and built-in <a href="/docs/hot-reloading">Hot Reloading</a>
     provides a fun, clean and productive alternative to MVC Razor that's easily 
-    <a href="/docs/view-engine">integrated into any web framework</a> and runs identically in 
-    <a href="/docs/view-engine#runs-everywhere">every platform ServiceStack runs on</a>, it can also
-    be returned in <a href="/docs/mvc-aspnet">ASP.NET MVC</a> and <a href="/docs/mvc-aspnet">ASP.NET MVC Core</a> 
+    <a href="/docs/sharp-pages">integrated into any web framework</a> and runs identically in 
+    <a href="/docs/sharp-pages#runs-everywhere">every platform ServiceStack runs on</a>, as well as
+    within <a href="/docs/mvc-aspnet">ASP.NET MVC</a> and <a href="/docs/mvc-aspnet">ASP.NET MVC Core</a> 
     Controllers - in all cases, using the same <a href="/docs/introduction#instant-startup">high-performance implementation</a>    
     to asynchronously write to a forward-only OutputStream for max performance and maximum potential reuse of your Source Code.
 </p>
 
 <p>
-    Templates are lazily loaded and <a href="/docs/introduction#late-bound">late-bound</a> for Instant Startup, doesn't require any 
-    pre-compilation, have coupling to any external configuration files, build tools, designer tooling or have 
-    any special deployment requirements.
-    It can be used as a general purpose templating language to enhance <a href="/docs/page-formats">any text format</a> and
-    includes built-in support for <em>.html</em>.
+    SharpScripts are lazily loaded and <a href="/docs/introduction#late-bound">late-bound</a> for Instant Startup, doesn't require any 
+    pre-compilation, coupling to any external configuration files, build tools, designer tooling or have any special deployment requirements.
+    It can be used as a general purpose scripting or templating language to generate <a href="/docs/page-formats">any text format</a> 
+    and includes built-in support for <em>.html</em>.
 </p>
 
+<h5 id="encapsulated">Encapsulated</h5>
+
 <p>
-    Templates are evaluated in an <a href="/docs/sandbox">Isolated Sandboxed</a> that enables fine-grained control over exactly
-    what functionality and instances are available to different Templates. They're pre-configured with a comprehensive suite of safe 
-    <a href="/docs/default-filters">Default Filters</a> which when running in trusted contexts can easily be granted access to 
+    Similar to <a href="https://vuejs.org/v2/guide/components.html">Vue.js Components</a>, Sharp Script's are evaluated in an 
+    <a href="/docs/sandbox">Encapsulated Sandbox</a> that enables fine-grained control over exactly what functionality and instances 
+    are available to different Scripts. They're pre-configured with a comprehensive suite of safe 
+    <a href="/docs/default-scripts">Default Scripts</a> which when running in trusted contexts can easily be granted access to 
     <a href="/docs/filters-reference">enhanced functionality</a>.
 </p>
 
+<h5 id="simple">Simple</h5>
+
 <p>
-    Templates are designed to be incrementally adoptable where its initial form is
-    <a href="/docs/web-apps#ideal-for-web-designers-and-content-authors">ideal for non-programmers</a>, 
+    SharpScript is designed to be incrementally adoptable where its initial form is
+    <a href="/docs/sharp-apps#ideal-for-web-designers-and-content-authors">ideal for non-programmers</a>, 
     that can gradually adopt more power and functionality when needed where they can leverage existing Services or MVC Controllers 
     to enable an 
     <a href="/docs/model-view-controller">MVC programming model</a> or have <em>.html</em> pages upgraded to use 
@@ -44,48 +77,54 @@ title: ServiceStack Templates
     normal <em>.html</em> pages are requested making them a non-invasive alternative whenever advanced functionality is required.
 </p>
 
-<h3>Surrounding Ecosystem</h3>
+<h3>Popular Use Cases</h3>
 
 <p>
-    These qualities opens Templates up to a number of new use-cases that's better suited than Razor for maintaining 
+    These qualities opens SharpScripts up to a number of new use-cases that's better suited than Razor for maintaining 
     <a href="/usecases/content-websites">content-heavy websites</a>, <a href="/usecases/live-documents">live documents</a>,
     <a href="/usecases/email-templates">Email Templates</a> and can easily 
     <a href="/usecases/introspect-state">introspect the state of running .NET Apps</a> where they provide 
-    <a href="/docs/servicestack-filters#debug-template">valuable insight at a glance</a> with support for 
+    <a href="/docs/servicestack-scripts#debug-template">valuable insight at a glance</a> with support for 
     <a href="/usecases/adhoc-querying">Adhoc querying</a>.
 </p>
 
-<h3>Web Apps</h3>
+<h3>SharpApps</h3>
 
 <p>
-    One use-case made possible by Templates we're extremely excited about is <a href="/docs/web-apps">Web Apps</a> - a new approach to 
-    dramatically simplify .NET Web App development and provide the most productive development experience possible whilst maximizing 
-    reuse and component sharing. 
+    One use-case made possible by SharpScript we're extremely excited about is <a href="/docs/sharp-apps">SharpApps</a> - a new approach to 
+    dramatically simplify .NET Web App development and provide the most productive development experience possible. 
 </p>
 
 <p>
-    Web Apps leverages Templates to develop entire content-rich, data-driven websites without needing to write any C#, compile projects 
-    or manually refresh pages - resulting in the easiest and fastest way to develop Web Apps in .NET!
+    SharpApps leverages SharpScript to develop entire content-rich, data-driven websites in a pure live development model 
+    without needing to write any C#, compile projects or manually refresh pages.
+</p>
+
+<p>
+    The integrated development experience extends to end-to-end to provide a seamless installation and deployment experience where the 
+    same <em>web</em> dotnet tool used to develop SharpApps is all users need to find and install Apps locally or hosted as a server App 
+    where they're easily deployed and <a href="/docs/deploying-sharp-apps">hosted on Linux or run within Docker</a> -
+    the overall SharpApps experience results in the easiest and fastest way to develop and deploy Web Apps in .NET!
 </p>
 
 <h4>Pure Cloud Apps</h4>
 
 <p>
-    Web Apps also enable the development of <a href="/docs/web-apps#pure-cloud-apps">Pure Cloud Apps</a> where the same Web App 
+    SharpApps also enable the development of <a href="/docs/sharp-apps#pure-cloud-apps">Pure Cloud Apps</a> where the same SharpApp 
     can be developed and run entirely on <em>AWS S3 and RDS</em> or <em>Azure Blob Storage and SQL Server</em> by just changing
-    the <em>app.settings</em> that's deployed with the pre-compiled <a href="https://github.com/ServiceStack/Web">Web App Binary</a>.
+    its <em>app.settings</em>.
 </p>
 
-<h3>Learn ServiceStack Templates</h3>
+<h3>Learn SharpScript</h3>
 
 <p>
-    Get started learning ServiceStack Templates by going through the <a href="/docs/installation">Interactive Guide</a> and creating
+    Get started learning SharpScript by going through the <a href="/docs/installation">Interactive Guide</a> and creating
     a <a href="/docs/installation#starter-projects">Starter Project</a>.
 </p>
 
 <p>
     View the source code of this 
-    <a href="https://github.com/NetCoreApps/TemplatePages">Template Pages generated website</a> to see how clean a website built with it is.
+    <a href="https://github.com/ServiceStack/sharpscript">Sharp Pages website</a> to see how clean a website built with it is.
 </p>
 
 <p>
@@ -95,19 +134,17 @@ title: ServiceStack Templates
 
 {{ "linq-preview" | partial({ rows: 7, example: "linq01" }) }}
 
-<h3>Free for OSS and Commercial Projects</h3>
+<h3>Free!</h3>
 
 <p>
-    We believe we've only just scratched the surface of what's possible with Templates and we'd love to see what new 
-    use-cases it can help achieve and help encourage an ecosystem of pluggable and reusable filters, so whilst ServiceStack is a 
-    <a href="https://github.com/ServiceStack/ServiceStack/blob/master/license.txt">dual-licensed</a> platform with a 
-    <a href="https://servicestack.net/pricing">commercial license</a> for closed-source projects, the core of Templates is 
-    being developed in <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a> which is an unrestricted
-    library that's free for OSS and commercial usage. 
+    We believe we've only scratched the surface of what's possible with SharpScript and we'd love to see what new 
+    use-cases it can help achieve and help encourage an ecosystem of pluggable and reusable scripts, SharpScript is 
+    being developed in <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a> which is a
+    <b>free library for commercial or non-commercial</b> use. 
 </p>
 
 <p>
-    ServiceStack's <a href="https://servicestack.net/download#free-quotas">existing free-quota restrictions</a>
+    ServiceStack's existing <a href="https://servicestack.net/download#free-quotas">free-quota restrictions</a>
     only applies if you're using <a href="https://github.com/ServiceStack/ServiceStack.OrmLite">OrmLite</a>,
     <a href="https://github.com/ServiceStack/ServiceStack.Redis">ServiceStack.Redis</a> or exceed the allowed free-quota of 
     ServiceStack Services.

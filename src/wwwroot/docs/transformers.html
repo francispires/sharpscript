@@ -4,7 +4,7 @@ order: 16
 -->
 
 <p>
-    You can apply a chain of multiple Stream transformations to Template output using Transformers which are just functions that
+    You can apply a chain of multiple Stream transformations to transform output using Transformers which are just functions that
     accept an Input Stream and return a modified Output Stream. The MarkdownPageFormat's <em>TransformToHtml</em> shows an example
     of a Transformer which converts Markdown Input and returns a Stream of HTML output:
 </p>
@@ -14,7 +14,7 @@ order: 16
 <h4 id="output-transformers">Output Transformers</h4>
 
 <p>
-    You can transform the entire output of a Template with Output Transformers which you would do if both your <b>_layout</b>
+    You can transform the entire output of a Script with Output Transformers which you would do if both your <b>_layout</b>
     and <b>page</b> both contain markdown, e.g:
 </p>
 
@@ -25,7 +25,7 @@ order: 16
 {{ 'gfm/transformers/03.md' | githubMarkdown }}
 
 <p>
-    After the Template is evaluated it's entire output gets passed into the chain of OutputTransformers defined, which in this case will
+    After the Script is evaluated it's entire output gets passed into the chain of OutputTransformers defined, which in this case will
     send a MemoryStream of the generated Markdown Output into the <em>MarkdownPageFormat.TransformToHtml</em> transformer which returns
     a Stream of converted HTML which is what's written to the OutputStream.
 </p>
@@ -46,10 +46,10 @@ order: 16
 <h4 id="filter-transformers">Filter Transformers</h4>
 
 <p>
-    Filter Transformers are used to apply Stream Transformations to <a href="/docs/filters#block-filters">Block Filters</a> which you 
+    Filter Transformers are used to apply Stream Transformations to <a href="/docs/methods#block-methods">Block Methods</a> which you 
     could use if you only wanted to convert an embedded Markdown file inside a Page to HTML. You can register Filter Transformers 
-    in either the TemplateContext's or PageResult's <em>FilterTransformers</em> Dictionary by assigning it the name you want it available in
-    your Templates under, e.g:
+    in either the ScriptContext's or PageResult's <em>FilterTransformers</em> Dictionary by assigning it the name you want it available in
+    your Scripts under, e.g:
 </p>
 
 {{ 'gfm/transformers/06.md' | githubMarkdown }}
@@ -61,7 +61,7 @@ order: 16
 <h4 id="htmlencode">htmlencode</h4>
 
 <p>
-    The <em>htmlencode</em> Filter Transformer is pre-registered in TemplateContext which lets you encode Block Filter outputs
+    The <em>htmlencode</em> Filter Transformer is pre-registered in ScriptContext which lets you encode Block Method outputs
     which is useful when you want to HTML Encode a text file before embedding it in the page, e.g:
 </p>
 

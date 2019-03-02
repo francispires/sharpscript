@@ -4,7 +4,7 @@ order: 3
 -->
 
 <p>
-    Since Templates are intuitive and approachable to non-programmers it's useful in several Business Activities that are better
+    Since SharpScript is intuitive and approachable to non-programmers it's useful in several Business Activities that are better
     served by non-technical Business employees like Marketers, Designers, Copywriters, etc. Generating and Previewing email
     templates are one example of this:
 </p>
@@ -87,13 +87,13 @@ $("FORM").ajaxPreview({
     This example uses this simple Service below to generate the HTML and plain-text email previews of this email template:
 </p>
 
-<h4><a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/EmailTemplatesService.cs">EmailTemplatesService.cs</a></h4>
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/EmailTemplatesService.cs">EmailTemplatesService.cs</a></h4>
 
 {{ 'gfm/email-templates/01.md' | githubMarkdown }}
 
 <p>
     The source code for this 
-    <a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/wwwroot/usecases/email-templates.html">email-templates.html</a>
+    <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/usecases/email-templates.html">email-templates.html</a>
     page shows the client preview itself is just using
     <a href="https://v4-alpha.getbootstrap.com/components/navs/#tabs">Bootstrap Tabs</a> that only uses this custom javascript:
 </p>
@@ -102,7 +102,7 @@ $("FORM").ajaxPreview({
 
 <p>
     Which calls the generic <em>ajaxPreview</em> jQuery plugin in 
-    <a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/wwwroot/assets/js/default.js">default.js</a>
+    <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/assets/js/default.js">default.js</a>
     to make an ajax request on every text box change.
 </p>
 

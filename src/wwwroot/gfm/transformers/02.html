@@ -1,14 +1,14 @@
-<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> <span class="pl-en">context </span>= <span class="pl-k">new</span> <span class="pl-en">TemplateContext</span> {
-    PageFormats = { <span class="pl-k">new</span> <span class="pl-en">MarkdownPageFormat</span>() }
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> <span class="pl-smi">context</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">ScriptContext</span> {
+    <span class="pl-smi">PageFormats</span> <span class="pl-k">=</span> { <span class="pl-k">new</span> <span class="pl-en">MarkdownPageFormat</span>() }
 }.<span class="pl-en">Init</span>();
 
-<span class="pl-en">context.VirtualFiles.WriteFile</span>("_layout.md", @"
-The Header
-
-{{ page }}<span class="pl-s"><span class="pl-pds">"</span>);</span>
+<span class="pl-smi">context</span>.<span class="pl-smi">VirtualFiles</span>.<span class="pl-en">WriteFile</span>(<span class="pl-s"><span class="pl-pds">"</span>_layout.md<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">@"</span></span>
+<span class="pl-s">The Header</span>
 <span class="pl-s"></span>
-<span class="pl-s">context.VirtualFiles.WriteFile(<span class="pl-pds">"</span></span><span class="pl-en">page.md</span>",  @"
-## {{ title }}
+<span class="pl-s">{{ page }}<span class="pl-pds">"</span></span>);
 
-<span class="pl-en">The</span> Content");</pre></div>
+<span class="pl-smi">context</span>.<span class="pl-smi">VirtualFiles</span>.<span class="pl-en">WriteFile</span>(<span class="pl-s"><span class="pl-pds">"</span>page.md<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">@"</span></span>
+<span class="pl-s">## {{ title }}</span>
+<span class="pl-s"></span>
+<span class="pl-s">The Content<span class="pl-pds">"</span></span>);</pre></div>
 </div>

@@ -5,9 +5,10 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using ServiceStack;
 using ServiceStack.IO;
-using ServiceStack.Templates;
+using ServiceStack.Script;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
     [Route("/introspect/state")]
     public class IntrospectState 
@@ -17,7 +18,7 @@ namespace TemplatePages
         public string DriveInfo { get; set; }
     }
 
-    public class StateTemplateFilters : TemplateFilter
+    public class StateScriptMethods : ScriptMethods
     {
         bool HasAccess(Process process)
         {
@@ -35,8 +36,8 @@ namespace TemplatePages
     {
         public object Any(IntrospectState request)
         {
-            var context = new TemplateContext {
-                ScanTypes = { typeof(StateTemplateFilters) }, //Autowires (if needed)
+            var context = new ScriptContext {
+                ScanTypes = { typeof(StateScriptMethods) }, //Autowires (if needed)
                 RenderExpressionExceptions = true
             }.Init();
 

@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using ServiceStack;
 
-namespace TemplatePages
+namespace SharpScript
 {
     public class QueryGitHubRepos : QueryData<GithubRepo>
     {

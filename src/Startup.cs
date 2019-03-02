@@ -7,7 +7,7 @@ using ServiceStack;
 using System.Net;
 using System.Web;
 
-namespace TemplatePages
+namespace SharpScript
 {
     public class Startup
     {

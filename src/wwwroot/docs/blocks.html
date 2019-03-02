@@ -1,17 +1,17 @@
 <!--
-title: Blocks
-order: 6
+title: Script Blocks
+order: 7
 -->
 
 {{#markdown}}
-Blocks lets you define reusable statements that can be invoked with a new context allowing the creation custom iterators and helpers - 
+Script Blocks lets you define reusable statements that can be invoked with a new context allowing the creation custom iterators and helpers - 
 making it easy to encapsulate reusable functionality and reduce boilerplate for common functionality.
 
 The syntax for blocks follows the familiar [handlebars block helpers](https://handlebarsjs.com/block_helpers.html) in both syntax and functionality.
-Templates also includes most of handlebars.js block helpers which are useful in a HTML template language whilst minimizing any porting efforts if 
+SharpScript also includes most of handlebars.js block helpers which are useful in a HTML template language whilst minimizing any porting efforts if 
 needing to reuse existing JavaScript handlebars templates.
 
-We'll walk through creating a few of the built-in Template blocks to demonstrate how to create them from scratch.
+We'll walk through creating a few of the built-in Script blocks to demonstrate how to create them from scratch.
 
 ### noop
 
@@ -22,7 +22,7 @@ from the rendered page:
 {{ 'gfm/blocks/01.md' | githubMarkdown }}
 
 {{#markdown}}
-The `noop` block is also the smallest implementation possible which needs to inherit `TemplateBlock` class, overrides the `Name` getter with 
+The `noop` block is also the smallest implementation possible which needs to inherit `ScriptBlock` class, overrides the `Name` getter with 
 the name of the block and implements the `WriteAsync()` method which for the noop block just returns an empty `Task` there by not writing anything 
 to the Output Stream, resulting in its inner contents being ignored:
 {{/markdown}}
@@ -32,7 +32,7 @@ to the Output Stream, resulting in its inner contents being ignored:
 {{#markdown}}
 All Block's are executed with 3 parameters:
 
- - `TemplateScopeContext` - The current Execution and Rendering context
+ - `ScriptScopeContext` - The current Execution and Rendering context
  - `PageBlockFragment` - The parsed Block contents
  - `CancellationToken` - Allows the async render operation to be cancelled
 {{/markdown}}
@@ -40,36 +40,36 @@ All Block's are executed with 3 parameters:
 <h3 id="registering-blocks">Registering Blocks</h3>
 
 {{#markdown}}
-The same flexible registration options for [Registering Filters](/docs/filters#registering-filters) is also available for registering blocks 
-where if it wasn't already built-in, `TemplateNoopBlock` could be registered by adding it to the `TemplateBlocks` collection:
+The same flexible registration options for [Registering Script Methods](/docs/methods#registering-methods) is also available for registering blocks 
+where if it wasn't already built-in, `NoopScriptBlock` could be registered by adding it to the `ScriptBlocks` collection:
 {{/markdown}}
 
 {{ 'gfm/blocks/03.md' | githubMarkdown }}
 
-<h5 id="scan-types">Autowired using TemplateContext IOC</h5>
+<h5 id="scan-types">Autowired using ScriptContext IOC</h5>
 
 {{#markdown}}
-Autowired instances of blocks and filters can also be created using TemplateContext's configured IOC where they're also injected with any 
+Autowired instances of script blocks and methods can also be created using ScriptContext's configured IOC where they're also injected with any 
 registered IOC dependencies by registering them in the `ScanTypes` collection: 
 {{/markdown}}
 
 {{ 'gfm/blocks/04.md' | githubMarkdown }}
 
 {{#markdown}}
-When the `TemplateContext` is initialized it will go through each Type and create an autowired instance of each Type and register them in the 
-`TemplateBlocks` collection. An alternative to registering individual Types is to register an entire Assembly, e.g:
+When the `ScriptContext` is initialized it will go through each Type and create an autowired instance of each Type and register them in the 
+`ScriptBlocks` collection. An alternative to registering individual Types is to register an entire Assembly, e.g:
 {{/markdown}}
 
 {{ 'gfm/blocks/05.md' | githubMarkdown }}
 
 {{#markdown}}
-Where it automatically registers any Blocks or Filters contained in the Assembly where the `MyBlock` Type is defined.
+Where it automatically registers any Script Blocks or Methods contained in the Assembly where the `MyBlock` Type is defined.
 {{/markdown}}
 
 {{#markdown}}
 ### bold
 
-A step up from `noop` is the **bold** Template Block which markup its contents within the `<b/>` tag:
+A step up from `noop` is the **bold** Script Block which markup its contents within the `<b/>` tag:
 {{/markdown}}
 
 <pre>
@@ -78,7 +78,7 @@ A step up from `noop` is the **bold** Template Block which markup its contents w
 
 {{#markdown}}
 Which calls the `base.WriteBodyAsync()` method to evaluate and write the Block's contents to the `OutputStream` using the current 
-`TemplateScopeContext`:
+`ScriptScopeContext`:
 {{/markdown}}
 
 {{ 'gfm/blocks/06.md' | githubMarkdown }}
@@ -125,8 +125,8 @@ which can then be evaluated by calling its `token.Evaluate(scope)` method.
 
 ##### Final implementation
 
-The actual [TemplateWithBlock.cs](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/Blocks/TemplateWithBlock.cs)
-used in Templates includes extended functionality which uses `GetJsExpressionAndEvaluateAsync()` to be able to evaluate both **sync** and **async** 
+The actual [WithScriptBlock.cs](https://github.com/ServiceStack/ServiceStack/tree/master/src/ServiceStack.Common/Script/Blocks/WithScriptBlock.cs)
+used in SharpScript includes extended functionality which uses `GetJsExpressionAndEvaluateAsync()` to be able to evaluate both **sync** and **async** 
 results. 
 
 ##### else if/else statements
@@ -160,12 +160,12 @@ index of each element:
 {{ 'gfm/blocks/11.md' | githubMarkdown }}
 
 {{#markdown}}
-Despite its terse implementation, the above Template Block can be used to iterate over any expression that evaluates to a collection, 
+Despite its terse implementation, the above Script Block can be used to iterate over any expression that evaluates to a collection, 
 inc. objects, POCOs, strings as well as Value Type collections like ints. 
 
 ##### Built-in each
 
-However the built-in [TemplateEachBlock.cs](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/Blocks/TemplateEachBlock.cs)
+However the built-in [EachScriptBlock.cs](https://github.com/ServiceStack/ServiceStack/tree/master/src/ServiceStack.Common/Script/Blocks/EachScriptBlock.cs)
 has a larger implementation to support its richer feature-set where it also includes support for async results, custom element bindings and LINQ-like syntax for 
 maximum expressiveness whilst utilizing expression caching to ensure any complex argument expressions are only parsed once.
 {{/markdown}}
@@ -220,7 +220,7 @@ When called with no arguments it will render its unprocessed raw text contents. 
 instead save the raw text contents to the specified global `PageResult` variable and lastly when called with the `appendTo` modifier it will append 
 its contents to the existing variable, or initialize it if it doesn't exist.
 
-This is now the preferred approach used in all [.NET Core and .NET Framework Web Templates](http://docs.servicestack.net/templates-websites) for 
+This is now the preferred approach used in all [.NET Core and .NET Framework Web Templates](https://docs.servicestack.net/templates-websites) for 
 pages and partials to append any custom JavaScript script blocks they need on the page, e.g:
 
 <pre>
@@ -244,7 +244,7 @@ Where any captured custom scripts are rendered at the
 </pre>
 
 The implementation to support each of these usages is contained within 
-[TemplateRawBlock.cs](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Templates/Blocks/TemplateRawBlock.cs)
+[RawScriptBlock.cs](https://github.com/ServiceStack/ServiceStack/tree/master/src/ServiceStack.Common/Script/Blocks/RawScriptBlock.cs)
 below which inspects the `block.Argument` to determine whether it should capture the contents into the specified variable or write its raw 
 string contents directly to the OutputStream:
 {{/markdown}}
@@ -256,7 +256,7 @@ string contents directly to the OutputStream:
 
 The `{{#capture}}` block is similar to the raw block except instead of using its raw text contents, it instead evaluates its contents and captures 
 the output. It also supports evaluating the contents with scoped arguments where by each property in the object dictionary is added in the 
-scoped arguments that the template is executed with:
+scoped arguments that the block is executed with:
 {{/markdown}}
 
 {{ 'gfm/blocks/14.md' | githubMarkdown }}
@@ -287,7 +287,7 @@ The `{{#markdown}}` block makes it even easier to embed markdown content directl
 {{#markdown}}
 Which is now the easiest and preferred way to embed Markdown content in content-rich hybrid web pages like 
 [Razor Rockstars content pages](https://github.com/NetCoreTemplates/rockwind-webapp/blob/master/app/rockstars/dead/cobain/index.html), 
-or even this [blocks.html WebPage itself](https://github.com/NetCoreApps/TemplatePages/blob/master/src/wwwroot/docs/blocks.html) which 
+or even this [blocks.html WebPage itself](https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/docs/blocks.html) which 
 makes extensive use of markdown.
 
 As `markdown` block only supports 2 usages its implementation is much simpler than the `capture` block above:
@@ -347,11 +347,10 @@ For a better illustration we can implement the same functionality above without 
 <h3 id="removing-blocks">Removing Blocks</h3>
 
 {{#markdown}}
-Like everything else in Templates, all built-in Blocks can be removed. To make it easy to remove groups of related blocks you can just remove the 
+Like everything else in SharpScript, all built-in Blocks can be removed. To make it easy to remove groups of related blocks you can just remove the 
 plugin that registered them using the `RemovePlugins()` API, e.g:
 {{/markdown}}
 
 {{ 'gfm/blocks/20.md' | githubMarkdown }}
 
 {{ "doc-links" | partial({ order }) }}
-

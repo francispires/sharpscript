@@ -4,12 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using ServiceStack;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 using ServiceStack.IO;
 using ServiceStack.DataAnnotations;
 using System.Threading.Tasks;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
     [Route("/linq/eval")]
     public class EvaluateLinq : IReturn<string>

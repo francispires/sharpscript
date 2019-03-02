@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using ServiceStack;
 using ServiceStack.IO;
+using ServiceStack.Script;
 using ServiceStack.Text;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
-    public class GitHubMarkdownFilters : TemplateFilter
+    public class GitHubMarkdownFilters : ScriptMethods
     {
         public string ApiBaseUrl { get; set; } = "https://api.github.com";
 
@@ -22,15 +23,15 @@ namespace TemplatePages
 
         public string RepositoryContext { get; set; }
 
-        public IRawString markdown(TemplateScopeContext scope, string markdown)
+        public IRawString markdown(ScriptScopeContext scope, string markdown)
         {            
              var html = MarkdownConfig.Transformer.Transform(markdown);
              return html.ToRawString();
         }
 
-        public async Task githubMarkdown(TemplateScopeContext scope, string markdownPath) 
+        public async Task githubMarkdown(ScriptScopeContext scope, string markdownPath) 
         {
-            var file = Context.ProtectedFilters.ResolveFile(nameof(githubMarkdown), scope, markdownPath);
+            var file = Context.ProtectedMethods.ResolveFile(nameof(githubMarkdown), scope, markdownPath);
             var htmlFilePath = file.VirtualPath.LastLeftPart('.') + ".html";
             var cacheKey = nameof(GitHubMarkdownFilters) + ">" + htmlFilePath;
 
@@ -98,7 +99,7 @@ namespace TemplatePages
 
                     if (Context.VirtualFiles is IVirtualFiles vfs)
                     {
-                        vfs.WriteFile(htmlFilePath, wrappedBytes);
+                        vfs.GetFileSystemVirtualFiles().WriteFile(htmlFilePath, wrappedBytes);
                     }
 
                     if (UseMemoryCache)

@@ -7,11 +7,11 @@ order: 26
 
 {{#markdown}}
 Plugins are a nice way to extend templates with customized functionality which can encapsulate any number of blocks, filters, 
-preferred configuration and dependencies by implementing the `ITemplatePlugin` interface. 
+preferred configuration and dependencies by implementing the `IScriptPlugin` interface. 
 
-The [MarkdownTemplatePlugin](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/MarkdownTemplatePlugin.cs)
+The [MarkdownScriptPlugin](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/MarkdownScriptPlugin.cs)
 is a good example of this which registers a markdown 
-[Page format](/docs/page-formats), [Filter](/docs/filters), [Filter Transformer](/docs/transformers) and 
+[Page format](/docs/page-formats), [Script Methods](/docs/methods), [Filter Transformer](/docs/transformers) and 
 [markdown Block](/docs/blocks#markdown):
 {{/markdown}}
 
@@ -28,22 +28,22 @@ When needed any default plugins can be removed with the `RemovePlugins()` API:
 {{#markdown}}
 #### Advanced plugin registration
 
-For greater control over the registration and execution of plugins, they can implement `ITemplatePluginBefore` to have custom logic
-executed before plugins are registered or implement `ITemplatePluginAfter` for executing any logic after.
+For greater control over the registration and execution of plugins, they can implement `IScriptPluginBefore` to have custom logic
+executed before plugins are registered or implement `IScriptPluginAfter` for executing any logic after.
 {{/markdown}}
 
-<h3 id="templatecontext">TemplateContext</h3>
+<h3 id="ScriptContext">ScriptContext</h3>
 
 <p>
-    The <em>TemplateContext</em> is the sandbox where all templates are executed within that can be customized with the 
+    The <em>ScriptContext</em> is the sandbox where all templates are executed within that can be customized with the 
     available APIs below:
 </p>
 
 <h4>Preconfigured defaults</h4>
 
 <p>
-    Some <a href="/docs/default-filters">default filters</a> when called without arguments will use the default configuration 
-    shown below that can be overridden by replacing their default value in the TemplateContext's <em>Args</em> collection:
+    Some <a href="/docs/default-scripts">default scripts</a> when called without arguments will use the default configuration 
+    shown below that can be overridden by replacing their default value in the ScriptContext's <em>Args</em> collection:
 </p>
 
 {{ 'gfm/api-reference/01.md' | githubMarkdown }}
@@ -51,14 +51,14 @@ executed before plugins are registered or implement `ITemplatePluginAfter` for e
 <h4>Args</h4>
 
 <p>
-    <a href="/docs/arguments">TemplateContext Arguments</a> can be used to define global variables available to every template, partial, filter, etc:
+    <a href="/docs/arguments">ScriptContext Arguments</a> can be used to define global variables available to every template, partial, filter, etc:
 </p>
 
 <h4>Virtual Files</h4>
 
 <p>
     Templates only have access to Pages available from its configured VirtualFiles which uses an empty <em>MemoryVirtualFiles</em>.
-    To make pages available to your <em>TemplateContext</em> instance you can choose to either programatically populate the 
+    To make pages available to your <em>ScriptContext</em> instance you can choose to either programatically populate the 
     <em>VirtualFiles</em> collection from an external source, e.g:
 </p>
 
@@ -75,23 +75,23 @@ executed before plugins are registered or implement `ITemplatePluginAfter` for e
 
 <p>
     <em>DebugMode</em> is used to control whether full Exception details like <em>StackTrace</em> is displayed. In 
-    <em>TemplatePageFeature</em> it defaults to the AppHost DebugMode, otherwise it's <b>true</b> by default.
+    <em>SharpPagesFeature</em> it defaults to the AppHost DebugMode, otherwise it's <b>true</b> by default.
 </p>
 
 <h4>ScanTypes</h4>
 
 <p>
-    Specify a <em>TemplateFilter</em> or <em>TemplateCodePage</em> to auto register.
+    Specify a <em>ScriptMethods</em> or <em>SharpCodePage</em> to auto register.
 </p>
 
 <h4>ScanAssemblies</h4>
 
 <p>
-    Specify assemblies that should be scanned to find TemplateFilter's and TemplateCodePage's to auto register. 
-    In <em>TemplatePageFeature</em> the AppHost's Service Assemblies are included by default.
+    Specify assemblies that should be scanned to find ScriptMethods's and SharpCodePage's to auto register. 
+    In <em>SharpPagesFeature</em> the AppHost's Service Assemblies are included by default.
 </p>
 
-<h4>TemplateFilters</h4>
+<h4>ScriptMethods</h4>
 
 <p>
     Register additional instances of filters you want templates to have access to.
@@ -106,7 +106,7 @@ executed before plugins are registered or implement `ITemplatePluginAfter` for e
 <h4>Container</h4>
 
 <p>
-    The IOC Container used by the <em>TemplateContext</em> to register and resolve dependencies, filters and Code Pages.
+    The IOC Container used by the <em>ScriptContext</em> to register and resolve dependencies, filters and Code Pages.
     Uses <em>SimpleContainer</em> by default.
 </p>
 
@@ -114,7 +114,7 @@ executed before plugins are registered or implement `ITemplatePluginAfter` for e
 
 <p>
     Specify an optional 
-    <a href="http://docs.servicestack.net/appsettings">App Settings provider</a> that templates can access with the 
+    <a href="https://docs.servicestack.net/appsettings">App Settings provider</a> that templates can access with the 
     <em>{{#raw}}{{ key | appSetting }}{{/raw}}</em>
     default filter.
 </p>
@@ -173,14 +173,14 @@ executed before plugins are registered or implement `ITemplatePluginAfter` for e
     }
 }</code></pre>
 
-<h4>TemplateFilters</h4>
+<h4>ScriptMethods</h4>
 
 <p>
     Make additional filters available to the Template:
 </p>
 
 <pre class="cs"><code>new PageResult(page) { 
-    TemplateFilters = { new MyFilters() }
+    ScriptMethods = { new MyScriptMethods() }
 }</code></pre>
 
 <h4>OutputTransformers</h4>
@@ -235,7 +235,7 @@ executed before plugins are registered or implement `ITemplatePluginAfter` for e
 
 <pre class="cs"><code>new PageResult(page) {
     Options = { 
-        ["X-Powered-By"] = "ServiceStack Templates"
+        ["X-Powered-By"] = "SharpScript"
     }
 }</code></pre>
 

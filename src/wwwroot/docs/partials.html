@@ -1,13 +1,13 @@
 <!--
 title: Partials
-order: 10
+order: 8
 -->
 
 <p>
-    Partials are just normal pages which contain reusable templates you'd like to embed in different pages.
+    Partials are just normal pages which contain reusable scripts you'd like to embed in different pages.
     There is no difference between pages and partials other than how they're embedded where pages are embedded 
     in a <b>_layout</b> using the <em>{{ pass: page }}</em> expression and partials are embedded using the
-    <em>partial</em> block filter which can also define scoped arguments on the call-site using an Object
+    <em>partial</em> block method which can also define scoped arguments on the call-site using an Object
     literal:
 </p>
 
@@ -30,7 +30,7 @@ Who can also access other arguments in scope <b>{{ layoutArg }}</b>`
 <h4>Select Partial</h4>
 
 <p>
-    Another way that partials can be embedded is using the <em>selectPartial</em> block filter which will re-evaluate
+    Another way that partials can be embedded is using the <em>selectPartial</em> block method which will re-evaluate
     the same partial for each item in the collection which is made available in the <em>it</em> binding, e.g:
 </p>
 
@@ -91,7 +91,7 @@ Customer {{ c.CustomerId }} {{ c.CompanyName | raw }}
 <h4>Resolving Partials and Pages</h4>
 
 <p>
-    Just like pages, partials are resolved from the TemplateContext's configured <em>VirtualFiles</em> sources 
+    Just like pages, partials are resolved from the ScriptContext's configured <em>VirtualFiles</em> sources 
     where partials in the root directory can be resolved without any specifying any folders:
 </p>
 

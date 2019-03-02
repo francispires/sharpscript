@@ -1,8 +1,8 @@
 #if false //stay within free-quota limit
 using ServiceStack;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
     [Route("/products/view")]
     public class ViewProducts

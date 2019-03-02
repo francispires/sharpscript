@@ -4,8 +4,8 @@ order: 17
 -->
 
 <p>
-    Templates has a simple, but effective configuration-free hot-reloading feature built-in that's enabled 
-    when registering the <a href="/docs/view-engine">TemplatePagesFeature</a> plugin:
+    SharpScript has a simple, but effective configuration-free hot-reloading feature built-in that's enabled 
+    when registering the <a href="/docs/sharp-pages">SharpPagesFeature</a> plugin:
 </p>
 
 {{ 'gfm/hot-reloading/01.md' | githubMarkdown }}
@@ -18,7 +18,7 @@ order: 17
 
 <p>
     This will embed the dependency-free <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/js/hot-loader.js">hot-loader.js</a>
-    script during <a href="http://docs.servicestack.net/debugging#debugmode">development</a> to poll the service endpoint below:
+    script during <a href="https://docs.servicestack.net/debugging#debugmode">development</a> to poll the service endpoint below:
 </p>
 
 <pre class="url"><code>/templates/hotreload/page?path=path/to/page&amp;eTag=lastETagReceived</code></pre>
@@ -36,7 +36,7 @@ order: 17
 <h4>When to reload</h4>
 
 <p>
-    Hot Reloading only monitors Template Pages. You'll need to do a hard refresh with <em>Ctrl+Shift+F5</em> if making changes to 
+    Hot Reloading only monitors Sharp Pages. You'll need to do a hard refresh with <em>Ctrl+Shift+F5</em> if making changes to 
     <em>.css</em> or <em>.js</em> to force the browser to not use its cache. For App Code or Configuration changes you'll 
     need to restart your App to pick up the changes.
 </p>
@@ -44,7 +44,7 @@ order: 17
 <h4>Implementation</h4>
 
 <p>
-    The Service is just a wrapper around the <em>ITemplatePages.GetLastModified(page)</em> API which returns the 
+    The Service is just a wrapper around the <em>ISharpPages.GetLastModified(page)</em> API which returns the 
     last modified date of the page and any of its dependencies by scanning each expression in the page's AST to 
     find each referenced partial or included file to find the most recent modified date which it compares against 
     the eTag provided by the client to determine whether or not any of the pages resources have changed.

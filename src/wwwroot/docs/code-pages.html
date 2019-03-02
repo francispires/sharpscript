@@ -14,7 +14,7 @@ order: 21
 <h4>Creating Code Pages</h4>
 
 <p>
-    A Code Page is a class that inherits <em>TemplateCodePage</em> and is annotated with a <em>[Page(virtualPath)]</em> 
+    A Code Page is a class that inherits <em>SharpCodePage</em> and is annotated with a <em>[Page(virtualPath)]</em> 
     attribute which is used to resolve the page in the same way <b>.html</b> pages are resolved by their virtualPath. 
     Code Pages take precedence over .html pages so you can start with an .html page and when you need more power and
     expressiveness, create a Code Page at the same virtualPath as the page you want to replace and it will get used instead.
@@ -39,7 +39,7 @@ order: 21
     A complete CodePage implementation using all these features is below:
 </p>
 
-<h4><a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/ProductsPage.cs">ProductsPage.cs</a></h4>
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/ProductsPage.cs">ProductsPage.cs</a></h4>
 
 {{ 'gfm/code-pages/01.md' | githubMarkdown }}
 
@@ -50,9 +50,9 @@ order: 21
 <h4><a href="/products">/products</a></h4>
 
 <p>
-    You typically wont need to explicitly register Code Pages since the <em>TemplatePagesFeature</em> populates its
+    You typically wont need to explicitly register Code Pages since the <em>SharpPagesFeature</em> populates its
     <em>ScanAssemblies</em> with the AppHost's Service assemblies which will automatically find and register any 
-    TemplateCodePage's that are in the same Assembly as ServiceStack Services and just like Services, Code Pages 
+    SharpCodePage's that are in the same Assembly as ServiceStack Services and just like Services, Code Pages 
     are autowired and resolved from the IOC transiently, so they can also be injected with any IOC registered dependencies
     by declaring them as public properties.
 </p>
@@ -65,19 +65,19 @@ order: 21
     CodePage by resolving it with its virtualPath:
 </p>
 
-<h4><a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/ProductServices.cs">ProductServices.cs</a></h4>
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/ProductServices.cs">ProductServices.cs</a></h4>
 
 {{ 'gfm/code-pages/02.md' | githubMarkdown }}
 
 <p>
     Which can be called with <b>/products/view</b> to display exactly the same content as calling ProductsPage directly, but instead uses 
-    the Routing and the argument populated by the ServiceStack Service, instead of the argument populated in the <em>TemplatePagesFeature</em> Arguments.
+    the Routing and the argument populated by the ServiceStack Service, instead of the argument populated in the <em>SharpPagesFeature</em> Arguments.
 </p>
 
 <p>
     Using the <em>Request.GetCodePage()</em> extension method is the recommended way to resolve Code Pages as it will 
     automatically inject the current <em>IRequest</em> on Code Pages that implement <em>IRequiresRequest</em> like
-    ServiceStackCodePage's. It's the same as resolving the Code Page from the <em>ITemplatePages</em> dependency 
+    ServiceStackCodePage's. It's the same as resolving the Code Page from the <em>ISharpPages</em> dependency 
     and injecting the <em>IRequest</em> manually:
 </p>
 
@@ -86,7 +86,7 @@ order: 21
 <h4>Code Pages as Partials</h4>
 
 <p>
-    Another area Code Pages are useful are as partials where they're able to escape the normal sandbox of Template Pages and
+    Another area Code Pages are useful are as partials where they're able to escape the normal sandbox of Sharp Pages and
     and use C# to access the existing functionality available within your Web App. 
 </p>
 
@@ -112,8 +112,8 @@ order: 21
     { 
         links: { 
             '/docs/model-view-controller': 'MVC', 
-            '/docs/view-engine': 'View Engine', 
-            '/docs/code-pages': 'Code Pages'
+            '/docs/sharp-pages': 'Sharp Pages', 
+            '/docs/code-pages': 'Sharp Code Pages'
         } 
     }) 
 }}
@@ -123,7 +123,7 @@ order: 21
     the <em>links</em> argument created when the partial was called:
 </p>
 
-<h4 id="code-page-partials"><a href="https://github.com/NetCoreApps/TemplatePages/blob/master/src/CodePagePartials.cs">CodePagePartials.cs</a></h4>
+<h4 id="code-page-partials"><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/CodePagePartials.cs">CodePagePartials.cs</a></h4>
 
 {{ 'gfm/code-pages/04.md' | githubMarkdown }}
 
@@ -143,7 +143,7 @@ order: 21
 <h4>ServiceStack Code Pages</h4>
 
 <p>
-    <em>ServiceStackCodePage</em> is a convenience base class that inherits <em>TemplateCodePage</em> and enhances it with
+    <em>ServiceStackCodePage</em> is a convenience base class that inherits <em>SharpCodePage</em> and enhances it with
     the same functionality that's available in ServiceStack's <em>Service</em> base class, e.g: access to the current
     <em>Request</em> context, Gateway, Database, Redis, CacheClient, Users Session, AuthRepository, etc.
 </p>

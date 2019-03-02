@@ -1,10 +1,11 @@
 using System.Linq;
 using System.Collections.Generic;
 using ServiceStack;
-using ServiceStack.Templates;
+using ServiceStack.Script;
 using ServiceStack.IO;
+using ServiceStack.Script;
 
-namespace TemplatePages
+namespace SharpScript
 {
     [Route("/emails/order-confirmation/preview")]
     public class PreviewHtmlEmail : IReturn<PreviewHtmlEmailResponse>
@@ -29,7 +30,7 @@ namespace TemplatePages
             var customer = Customers.GetCustomer(request.PreviewCustomerId) 
                 ?? Customers.GetAllCustomers().First();
 
-            var context = new TemplateContext {
+            var context = new ScriptContext {
                 PageFormats = { new MarkdownPageFormat() },
                 Args = {
                     ["customer"] = customer,
