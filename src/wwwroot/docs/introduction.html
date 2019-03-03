@@ -4,7 +4,7 @@ order: 2
 -->
 
 <p>
-    #Script is a simple and elegant, <a href="/docs/methods">highly-extensible</a>, <a href="/docs/sandbox">sandboxed</a>, 
+    <em>#Script</em> is a simple and elegant, <a href="/docs/methods">highly-extensible</a>, <a href="/docs/sandbox">sandboxed</a>, 
     high-performance <a href="/docs/page-formats">general-purpose</a> templating engine for .NET 4.5 and .NET Core. 
     It's designed from the ground-up to be incrementally adoptable where its basic usage is simple enough 
     for non-technical users to use whilst it progressively enables access to more power and functionality allowing it to scale up to 
@@ -112,7 +112,91 @@ order: 2
     <em>WebRootPath</em> to include a specific partial or file from a different folder.
 </p>
 
-<h3>High-level, Declarative and Intent-based</h3>
+<h3 id="instant-startup">Instant Startup</h3>
+
+<p>
+    There's no pre-compilation, pre-loading or Startup penalty, all Pages are lazily loaded on first use and cached for fast subsequent
+    evaluation. Its instant Startup, fast runtime performance and sandboxed isolation opens it up to a myriad of new use-cases which
+    can enhance .NET Apps with a rich Live programming experience.
+</p>
+
+<h3 id="fast-runtime-performance">Fast Runtime Performance</h3>
+
+<p>
+    <em>#Script</em> is fast, parsing is done using StringSegment for minimal GC pressure, all I/O is non-blocking inc. async
+    writes to OutputStream's. There's no buffering: Layouts, Pages and Partials are asynchronously written to a forward only stream.
+    There's no runtime reflection, each filter or binding within template expressions executes compiled and cached C# Expressions.
+</p>
+
+<h3>Pure, Functional and Reactive</h3>
+
+<p>
+    <em>#Script</em> is pure at both the library-level where they're a clean library with no external dependencies outside
+    <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a>, no coupling to web frameworks, external configuration files,
+    designer tooling, build tools, pre-compilation steps or require any special deployment requirements.
+    It binds to simple, clean, small interfaces for its
+    <a href="https://docs.servicestack.net/virtual-file-system">Virtual File System</a>,
+    <a href="https://docs.servicestack.net/ioc">IOC</a> and
+    <a href="https://docs.servicestack.net/appsettings">AppSettings</a> providers which are easily overridden to
+    <a href="/docs/view-engine#view-engine-in-servicestack">integrate cleanly into external web frameworks</a>.
+</p>
+
+<p>
+    It's also pure at the code-level where it doesn't have any coupling to concrete dependencies, components or static classes. Default script methods
+    doesn't mutate any external state and returns an expression forcing a more readable and declarative
+    programming-style that's easier to quickly determine the subject of expressions and the states that need to be met for methods to be executed.
+    Conceptually scripts are "evaluated" in that they take in arguments, methods and script pages as inputs and evaluates them to an output stream.
+    They're highly testable by design where the same environment used to create the context can easily be re-created in Unit tests,
+    including simulating pages in a File System using its In Memory Virtual File System.
+</p>
+
+<h3 id="optimal-dev">Optimal Development Experience</h3>
+
+<p>
+    The above attributes enables an instant iterative development workflow with a Live Development experience that supports
+    configuration-free <a href="/docs/hot-reloading">Hot Reloading</a> out of the box that lets you build entire
+    <a href="/usecases/content-websites">Web Apps</a> and <a href="/docs/sharp-apis">Web APIs</a> without ever having to compile or manually Refresh pages.
+</p>
+
+<h3 id="simplicity-end-to-end">Simplicity end-to-end</h3>
+
+<p>
+    There are 3 main concepts in <em>#Script</em>: <a href="/docs/arguments">Arguments</a> - variables which can be made available
+    through a number of cascading sources, <a href="/docs/blocks">Script Blocks</a> which define the statements available and
+    <a href="/docs/methods">Script Methods</a> - public C# methods that exist in the list of
+    <em>ScriptMethods</em> registered in the PageResult or ScriptContext that scripts are executed within.
+</p>
+
+<p>
+    Layouts, Pages and Partials are all just "pages", evaluated in the same way with access to arguments and filters. Parameters passed
+    to partials are just scoped arguments, accessed like any other arguments. Typically pages are sourced from the configured
+    File System but when access to more advanced functionality is required they can also be <a href="/docs/code-pages">Code Pages</a> implemented
+    in pure C# that are otherwise interchangeable and can be used anywhere a normal page is requested.
+</p>
+
+<p>
+    There's no language constructs or reserved words in <em>#Script</em> itself, all functionality is implemented inside script methods.
+    There's also nothing special about the <a href="/docs/default-scripts">Default Scripts</a> included with #Script
+    other than they're pre-registered by default. External script methods can do anything built-in methods can do which can just
+    as easily be <a href="/docs/methods#shadowing">shadowed or removed</a> giving you a clean slate where you're free to define your own
+    language and preferred language naming scheme.
+</p>
+
+<p>
+    They're non-invasive, by default <a href="/docs/sharp-pages">Sharp Pages</a> is configured to handle
+    <em>.html</em> files but can be configured to handle any html extension or <a href="/docs/page-formats">text file format</a>.
+    When a page doesn't contain any Template Expressions it's contents are returned as-is, making it easy to adopt in existing
+    static websites.
+</p>
+
+<p>
+    <em>#Script</em> scripts are <a href="/docs/sandbox">sandboxed</a>, they can't call static or instance methods, invoke setters or access anything
+    outside of the arguments, methods and blocks made available to them. Without methods or blocks, expressions wouldn't have any methods
+    they can call, leaving them with the only thing they can do which is access arguments and replace their variable placeholders,
+    including the <em>{{ pass: page }}</em> placeholder to tell the Layout where to render the page.
+</p>
+
+<h3 id="declarative">High-level, Declarative and Intent-based</h3>
 
 <p>
     High-level APIs are usually synonymous with being slow by virtue of paying a penalty for their high-level abstraction,
@@ -127,7 +211,7 @@ order: 2
 {{ 'gfm/introduction/08.md' | githubMarkdown }}
 
 <p>
-    The intent of #Script code should be clear even if it's the first time reading it. From left-to-right we can deduce that it
+    The intent of <em>#Script</em> code should be clear even if it's the first time reading it. From left-to-right we can deduce that it
      retrieves a url from the quote table, downloads its contents of and converts it to markdown before replacing the text "Razor" and
      "2010" and displaying the <em>raw</em> non-HTML encoded html output. 
 </p>
@@ -141,7 +225,7 @@ order: 2
 
 <h5>Implementation using #Script</h5>
 <p>
-    What does #Script do? lets step through the first filter:
+    What does <em>#Script</em> do? lets step through the first filter:
 </p>
 
 {{ "live-template" | partial({ output:'no-scroll', rows:1, template: "{{ 'select url from quote where id= @id' | dbScalar({ id:1 }) | htmlLink }}" }) }}
