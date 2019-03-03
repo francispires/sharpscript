@@ -1,14 +1,15 @@
-<h4>HTML Results (select):</h4>
-{{ "select customerId, companyName, city, country from customer where country = @country" 
+<pre>
+{{ "select customerId,companyName,city,country from customer where country=@country"
    | assignTo: selectSql }}
-{{ selectSql | dbSelect({ country: 'UK' }) | htmlDump({ caption: selectSql }) }}
+{{ selectSql }}
+{{ selectSql | dbSelect({ country: 'UK' }) | textDump({ caption:"HTML Results (select):" }) }}
 
-<h4>Text Results (single):</h4>
 {{ "select * from customer c join [order] o on c.customerId = o.customerId 
-         order by total desc limit 1" | assignTo: singleSql }}
-<pre>{{ singleSql }}:
-{{ singleSql | dbSingle | dump }}</pre>
+         order by total desc limit 1" | assignTo: singleSql }}{{ singleSql }}:
 
-<h4>Object Value (scalar):</h4>
+{{ singleSql | dbSingle | textDump({ caption:"Text Results (single):" }) }}
+
+Object Value (scalar):
 {{ "select min(orderDate) from [order]" | assignTo: scalarSql }}
-<pre>{{ scalarSql }}: <b>{{ scalarSql | dbScalar | dateFormat }}</b></pre>
+{{ scalarSql }}: <b>{{ scalarSql | dbScalar | dateFormat }}</b>
+</pre>

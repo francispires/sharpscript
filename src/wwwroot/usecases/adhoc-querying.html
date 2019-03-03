@@ -19,7 +19,12 @@ order: 6
 
 {{ 'examples/adhoc-query-db.html' | includeFile | assignTo: template }}
 
-{{ "live-template" | partial({ rows:20, template }) }}
+{{ "live-template" | partial({ rows:15, template }) }}
+
+<blockquote>
+    Tip: <em>textDump</em> generates <a href="https://help.github.com/en/articles/organizing-information-with-tables">GitHub Flavored Markdown tables</a>
+    which can be embedded in Markdown to generate HTML tables or you can use <em>htmlDump</em> instead to generate HTML tables directly.    
+</blockquote>
 
 <hr style="margin:20px 0">
 
