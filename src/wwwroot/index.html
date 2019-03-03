@@ -97,8 +97,35 @@
 
 <p>
     Sharp Apps leverages #Script to develop entire content-rich, data-driven websites in a pure live development model 
-    without needing to write any C#, compile projects or manually refresh pages.
+    without needing to write any C#, compile projects or manually refresh pages. Checkout the Spirals Sharp App below 
+    for a glimpse of the Live Development experience available:
 </p>
+
+<a name="videos"></a>
+<p class="videos">
+    <style>
+        .youtube-viewer:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    </style>
+<div class="youtube-viewer" data-video="https://www.youtube.com/embed/Cf-vstYXrmY">
+    <img style="position:absolute; width:100px; margin:310px 0 0 390px" src="https://servicestack.net/img/youtube-play.png"/>
+    <img width="880" src="/assets/img/screenshots/spirals.png">
+</div>
+<script>
+    document.querySelector('.youtube-viewer').addEventListener('click', function () {
+        var video = '<iframe width="880" height="495" src="' + $(this).attr('data-video') + '?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+        this.innerHTML = video;
+    });
+</script>
+</p>
+
+<blockquote>
+    See the <a href="https://github.com/mythz/spirals#the-making-of-spirals">Making of Spirals</a> for a walk through on how to create
+    the Spirals Web App from scratch.
+</blockquote>
+
 
 <p>
     The integrated development experience extends to end-to-end to provide a seamless installation and deployment experience where the 
