@@ -92,12 +92,20 @@ order: 18
     static pages can come alive with access to <a href="/docs/default-scripts">Default Scripts</a>.
 </p>
 
+<h2 id="content-pages">Content Pages</h2>
+
+<p>
+  There are a number of different ways you can use <em>#Script</em> to render dynamic pages, requests that calls and renders 
+  <em>#Script</em> <b>.html</b> pages directly are called <b>"Content Pages"</b> which don't use any Services or Controllers
+  and can be called using a number of different styles and calling conventions: 
+</p>
+
 <h3 id="page-based-routing">Page Based Routing</h3>
 
 <p>
     Any <em>.html</em> page available from your AppHost's configured <a href="https://docs.servicestack.net/virtual-file-system">Virtual File Sources</a>
-    can be called directly, typically this would mean the File System which in a .NET Core Web App starts from the <em>WebRootPath</em> 
-    (usually /wwwroot) so a request to <em>/docs/sharp-pages</em> goes through all configured VirtualFileSources to find the first 
+    can be called directly, typically this would mean the File System which in a .NET Core Web App starts from the <b>WebRootPath</b>
+    (e.g <em>/wwwroot</em>) so a request to <em>/docs/sharp-pages</em> goes through all configured <em>VirtualFileSources</em> to find the first 
     match, which for this website is the file
     <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/docs/sharp-pages.html">/src/wwwroot/docs/sharp-pages.html</a>.
 </p>
@@ -223,26 +231,64 @@ order: 18
 </pre>
 {{/raw}}
     
-<h4 id="view-pages">View Pages</h4>
+<h2 id="view-pages">View Pages</h2>
 
 <p>
-    View Pages lets you use <em>.html</em> Sharp Pages to render the HTML for Services Responses. 
-    It works similarly to <a href="http://razor.servicestack.net/#smart-views">Razor ViewPages</a>
-    where it uses first matching View Page with the Response DTO is injected as the `Model` property. 
-    The View Pages can be in any folder within the <em>/Views</em> folder using the format <em>{PageName}.html</em> where <em>PageName</em> 
-    can be either the <b>Request DTO</b> or <b>Response DTO</b> Name, but all page names within the <em>/Views</em> folder need to be unique.    
+    "View Pages" are pages that are rendered <b>after a Service is executed</b>, where it's typically used to provide the "HTML UI"
+    for the Service's <b>Response DTO</b> where it's populated in the <em>Model</em> page argument
+    as done in <a href="http://razor.netcore.io/#smart-views">Razor ViewPages</a>.
 </p>
 
 <p>
-    Just like ServiceStack.Razor, you can specify to use different Views or Layouts by returning a custom <em>HttpResult</em>, e.g:
+    View Pages can be in any nested folder within the <em>/Views</em> folder but all page names within the <em>/Views</em> folder need to be unique. 
+    The name should use the format using the format <em>{PageName}.html</em> where <em>PageName</em> can be either: 
+</p>
+
+<ul>
+  <li><b>Request DTO</b> Name (e.g. <em>GetContact</em>)</li>
+  <li><b>Response DTO</b> Name (e.g. <em>GetContactResponse</em>)</li>
+</ul>
+
+<p>
+  There are a number of other ways to specify which <b>View</b> you want to render:
+</p>
+
+<h3 id="default-view">Specify the Services DefaultView</h3>
+
+<p>
+    You can specify which view all Services should use to render their responses by using the <em>[DefaultView]</em> Request Filter Attribute:
+</p>
+
+{{ 'gfm/sharp-pages/12.md' | githubMarkdown }}
+
+<h3 id="viewpage-htmlresult">Specify View with custom <em>HttpResult</em></h3>
+
+<p>
+    Just like ServiceStack.Razor, you can specify to use different Views or Layouts by returning a 
+    decorated response in custom <em>HttpResult</em> with the <em>View</em> or <em>Template</em> you want the Service rendered in , e.g:
 </p>
 
 {{ 'gfm/sharp-pages/09.md' | githubMarkdown }}
 
+<h3 id="custom-pageresult">Return Custom PageResult</h3>
+
 <p>
-    Or add the <em>[ClientCanSwapTemplates]</em> Request Filter attribute to allow clients to specify which View and Template to use via the query 
-    string, e.g: <em>?View=CustomPage&amp;Template=_custom-layout</em>
+  For maximum flexibility to control how views are rendered you can return a custom <em>PageResult</em> using 
+  <em>Request.GetPage()</em> or <em>Request.GetCodePage()</em> extension methods as seen in 
+  <a href="/docs/model-view-controller">Model View Controller</a>:
 </p>
+
+{{ 'gfm/model-view-controller/02.md' | githubMarkdown }}
+
+<h3 id="ClientCanSwapTemplates">Allow Views to be specified on the QueryString</h3>
+
+<p>
+    You can use the <em>[ClientCanSwapTemplates]</em> Request Filter attribute to let the View and Template by specified on the QueryString, 
+    e.g: <em>?View=CustomPage&Template=_custom-layout</em>
+</p>
+
+{{ 'gfm/sharp-pages/13.md' | githubMarkdown }}
+
 <p>
     Additional examples of dynamically specifying the View and Template are available in 
     <a href="https://github.com/ServiceStack/ServiceStack/blob/master/tests/ServiceStack.WebHost.Endpoints.Tests/ScriptTests/SharpViewsTests.cs">SharpViewsTests.cs</a>.
@@ -365,7 +411,7 @@ order: 18
     users and can be called with:
 </p>
 
-<pre><code>/templates/admin</code></pre>
+<pre><code>/script/admin</code></pre>
 
 <p>
     Which will display the available actions which are currently only:
@@ -387,14 +433,14 @@ order: 18
     Actions can be invoked in the format with:
 </p>
 
-<pre><code>/templates/admin/{Actions}</code></pre>
+<pre><code>/script/admin/{Actions}</code></pre>
 
 <p>
     Which can be used to call 1 or more actions:
 </p>
 
-<pre><code>/templates/admin/invalidateAllCaches
-/templates/admin/invalidateAllCaches,RunInitPage</code></pre>
+<pre><code>/script/admin/invalidateAllCaches
+/script/admin/invalidateAllCaches,RunInitPage</code></pre>
 
 <p>
     By default it's only available to be called by **Admin** Users (or <a href="https://docs.servicestack.net/debugging#authsecret">AuthSecret</a>) 
