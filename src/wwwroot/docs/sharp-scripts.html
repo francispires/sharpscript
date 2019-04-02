@@ -7,11 +7,24 @@ order: 20
 The [web .NET Core tool](https://docs.servicestack.net/web-new) also serve as a `#Script` runner. The Vue and React "lite" project templates
 take advantage of this in their [Pre-compiled minified production _bundle.ss script](https://docs.servicestack.net/templates-lite#pre-compiled-minified-production-bundles) 
 which is run with `web run {script}`:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/10.md' | githubMarkdown }}
+
+{{#markdown}}
+Which can be run with the `web` tool:
 
     $ dotnet tool install --global web 
 
     $ web run wwwroot/_bundle.ss
 
+Which will create the production bundles, minify all already non-minified bundles and write them to disk with the paths written visible in the 
+`#Script` **_bundle.ss** output:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/11.md' | githubMarkdown }}
+
+{{#markdown}}
 **[Sharp Scripts](/docs/sharp-scripts)** are **run in the same context** and have access to the same functionality and features as a 
 [Sharp App](/docs/sharp-apps) including extensibility va [custom plugins](/docs/sharp-apps#plugins). 
 They can run **stand-alone** independent of an 
