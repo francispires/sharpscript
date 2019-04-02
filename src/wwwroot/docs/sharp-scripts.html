@@ -1,0 +1,143 @@
+<!--
+title: Sharp Scripts
+order: 20
+-->
+
+{{#markdown}}
+The [web .NET Core tool](https://docs.servicestack.net/web-new) also serve as a `#Script` runner. The Vue and React "lite" project templates
+take advantage of this in their [Pre-compiled minified production _bundle.ss script](https://docs.servicestack.net/templates-lite#pre-compiled-minified-production-bundles) 
+which is run with `web run {script}`:
+
+    $ dotnet tool install --global web 
+
+    $ web run wwwroot/_bundle.ss
+
+**[Sharp Scripts](/docs/sharp-scripts)** are **run in the same context** and have access to the same functionality and features as a 
+[Sharp App](/docs/sharp-apps) including extensibility va [custom plugins](/docs/sharp-apps#plugins). 
+They can run **stand-alone** independent of an 
+[app.settings](/docs/sharp-apps#ideal-for-web-designers-and-content-authors) config file, instead the app settings configuration
+can be added in its page arguments to enable or configure any features.
+
+Lets go through a couple of different possibilities we can do with scripts:
+
+### Adhoc reports
+
+Scripts can use the built-in [Database Scripts](/docs/db-scripts) to be able to [run queries against any](/docs/sharp-apps#multi-platform-configurations) `sqlite`, `sqlserver`, `mysql` and `postgres` database and quickly view data snapshots using the built-in
+[HTML Scripts](/docs/html-scripts#htmldump), e.g:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/01.md' | githubMarkdown }}
+
+{{#markdown}}
+#### Specifying Script Arguments
+
+The above script generates a static HTML page can be invoked with **any number of named arguments** after the script name, in this case it
+generates a report for Northwind Order **#10643**, saves it to `10643.html` and opens it in the OS's default browser:
+
+    $ web run script.html -id 10643 > 10643.html && start 10643.html
+
+Which looks like:
+
+![](https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/sharpscript/10643.html.png)
+
+### textDump
+
+Generating static `.html` pages can quickly produce reports that looks good enough to share with others, 
+but if you just want to see a snapshot info at a glance or be able to share in text-based mediums like email or chat
+channels you can replace `htmlDump` with `textDump` where it will instead output GitHub flavored Markdown tables, e.g:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/02.md' | githubMarkdown }}
+
+{{#markdown}}
+As the output is human-readable we can view directly it without a browser:
+
+    $ web run script.ss -id 10643 
+
+Which will output:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/07.md' | githubMarkdown }}
+
+{{#markdown}}
+And because they're GitHub Flavored Markdown Tables they can be embedded directly in Markdown docs (like this) where it's renders as:
+{{/markdown}}
+
+<div class='markdown-body'>
+{{ 'gfm/sharp-scripts/08.md' | githubMarkdown }}
+</div>
+
+{{#markdown}}
+### AWS Dashboards
+
+The [comprehensive built-in scripts](/docs/default-scripts) coupled with ServiceStack's agnostic 
+providers like the [Virtual File System](/virtual-file-system) makes it easy to quickly query infrastructure resources
+like all Tables and Row counts in managed AWS RDS Instances or Search for static Asset resources in S3 Buckets.
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/03.md' | githubMarkdown }}
+
+{{#markdown}}
+You can use `$NAME` to move confidential information out of public scripts where it will be replaced with Environment 
+Variables. Then run the script as normal and optionally override the `find` pattern for files you want to search for:
+
+    $ web run script-aws.ss -find *.png
+
+Where it displays a dashboard of activity from your AWS resources: containing all Tables with their Row Counts, 
+adhoc queries like your last 5 Orders, The Root files and Folders available in your S3 Bucket and any matching resources 
+from your `find` search pattern:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/09.md' | githubMarkdown }}
+
+{{#markdown}}
+### Azure Dashboards
+
+The nice thing about `#Script` late-binding and cloud agnostic providers is that with just different configuration we
+can **use the exact same script** to query an Azure managed SQL Server Database and Azure Blob File Storage:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/04.md' | githubMarkdown }}
+
+{{#markdown}}
+## Live #Script with 'web watch'
+
+What's even nicer than the fast feedback of running adhoc scripts? Is the instant feedback you get from being able to **"watch"** the same script!
+
+To watch a script just replace `run` with `watch`:
+
+    $ web watch script-aws.ss -find *.png
+
+[![](https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/sharpscript/watch-aws-azure.gif)](/docs/sharp-scripts)
+
+The ability to run stand-alone adhoc scripts in an extensible dynamic scripting language feels like you're 
+using a "developer enhanced" SQL Studio, where you can combine queries from multiple data sources, [manipulate them with LINQ](https://sharpscript.net/linq/restriction-operators) 
+and quickly pipe results to dump utils to combine them in the same output for instant visualization.
+
+`#Script` scripts can also be easily shared, maintained in gists and run on all different Win/OSX/Linux OS's that .NET Core runs on.
+
+### Live Transformations
+
+Another area where "watched" scripts can shine is as a "companion scratch pad" assistant during development that you can quickly switch to
+and instantly test out live code fragments, calculations and transformations, e.g. This ends up being a great way to test out markdown syntax
+and Nuglify's advanced compression using our new `minifyjs` and `minifycss` [Script Blocks](/docs/blocks):
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/05.md' | githubMarkdown }}
+
+{{#markdown}}
+Then run with:
+
+    $ web watch livepad.ss
+
+Which starts a live watched session that re-renders itself on save, initially with:
+{{/markdown}}
+
+{{ 'gfm/sharp-scripts/06.md' | githubMarkdown }}
+
+{{#markdown}}
+### Live Session
+
+[![](https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/sharpscript/livepad.gif)](/docs/sharp-scripts)
+{{/markdown}}
+

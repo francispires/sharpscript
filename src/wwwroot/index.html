@@ -12,71 +12,6 @@
     within a sandbox environment - ensuring scripts are encapsulated and developed using clean, reusable and testable components. 
 </p>
 
-<h5 id="language">Language</h5>
-
-<p>
-    The language itself a familiar combination of
-    <a href="/docs/expression-viewer">JavaScript expressions</a> contained within Template Expressions popularized in    
-    <a href="https://vuejs.org/v2/guide/filters.html">Vue.js filters</a> and 
-    <a href="https://angular.io/guide/template-syntax#template-expression-operators">Angular's Template Expressions</a>
-    whilst statements adopt <a href="/docs/blocks">Handlebars block helpers</a> syntax. The language is also highly extensible which is pre-configured
-    <a href="/docs/default-scripts">comprehensive suite of safe methods</a> and blocks by default, but are all registered via its 
-    rich plugin functionality which can be completely removed or "shadowed" (aka overridden) where it could be used to form the basis of your
-    own completely different DSL.
-</p>
-
-<h5 id="ecosystem">Ecosystem</h5>
-
-<p>
-    In addition to the language, #Script includes a surrounding ecosystem of rich functionality adapting #Script
-    to power a number of fun and exciting scenarios. E.g. Scripts are lazily loaded from its Virtual File System
-    which can be configured to use any of the <a href="https://docs.servicestack.net/virtual-file-system">available Virtual File Systems</a>
-    and is what enables <a href="/docs/sharp-apps#pure-cloud-apps">Pure Cloud Apps</a> where <b>entire</b> Sharp Apps could be hosted within
-    your AWS S3 Bucket or Azure Blob Storage.
-</p>
-
-<h5 id="dynamic">Dynamic</h5>
-
-<p>
-    It's small, lightweight footprint and built-in <a href="/docs/hot-reloading">Hot Reloading</a>
-    provides a fun, clean and productive alternative to MVC Razor that's easily 
-    <a href="/docs/sharp-pages">integrated into any web framework</a> and runs identically in 
-    <a href="/docs/sharp-pages#runs-everywhere">every platform ServiceStack runs on</a>, as well as
-    within <a href="/docs/mvc-aspnet">ASP.NET MVC</a> and <a href="/docs/mvc-aspnet">ASP.NET MVC Core</a> 
-    Controllers - in all cases, using the same <a href="/docs/introduction#instant-startup">high-performance implementation</a>    
-    to asynchronously write to a forward-only OutputStream for max performance and maximum potential reuse of your Source Code.
-</p>
-
-<p>
-    #Script scripts are lazily loaded and <a href="/docs/introduction#late-bound">late-bound</a> for Instant Startup, doesn't require any 
-    pre-compilation, coupling to any external configuration files, build tools, designer tooling or have any special deployment requirements.
-    It can be used as a general purpose scripting or templating language to generate <a href="/docs/page-formats">any text format</a> 
-    and includes built-in support for <em>.html</em>.
-</p>
-
-<h5 id="encapsulated">Encapsulated</h5>
-
-<p>
-    Similar to <a href="https://vuejs.org/v2/guide/components.html">Vue.js Components</a>, Sharp Script's are evaluated in an 
-    <a href="/docs/sandbox">Encapsulated Sandbox</a> that enables fine-grained control over exactly what functionality and instances 
-    are available to different Scripts. They're pre-configured with a comprehensive suite of safe 
-    <a href="/docs/default-scripts">Default Scripts</a> which when running in trusted contexts can easily be granted access to 
-    <a href="/docs/filters-reference">enhanced functionality</a>.
-</p>
-
-<h5 id="simple">Simple</h5>
-
-<p>
-    #Script is designed to be incrementally adoptable where its initial form is
-    <a href="/docs/sharp-apps#ideal-for-web-designers-and-content-authors">ideal for non-programmers</a>, 
-    that can gradually adopt more power and functionality when needed where they can leverage existing Services or MVC Controllers 
-    to enable an 
-    <a href="/docs/model-view-controller">MVC programming model</a> or have <em>.html</em> pages upgraded to use 
-    <a href="/docs/code-pages">Code Pages</a> where they can utilize the full unlimited power of the C# programming language to 
-    enable precise control over the rendering of pages and partials. Code pages take precedence and are interchangeable wherever 
-    normal <em>.html</em> pages are requested making them a non-invasive alternative whenever advanced functionality is required.
-</p>
-
 <h3>Popular Use Cases</h3>
 
 <p>
@@ -88,15 +23,42 @@
     <a href="/usecases/adhoc-querying">Adhoc querying</a>.
 </p>
 
+<h3>Sharp Scripts</h3>
+
+<p>
+    The easiest way to get started is to run a <a href="/docs/sharp-scripts">Sharp Script</a> in 
+    <a href="/docs/sharp-scripts#live-script-with-web-watch">watch mode</a>
+    by creating a text file with the <em>.ss</em> extension and running it with <em>web watch &lt;name&gt;.ss</em>.
+    Scripts have access to all built-in Scripts and ServiceStack's which makes it easy to create scripts 
+    that run against 
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite#8-flavours-of-ormlite-is-on-nuget">all supported RDBMS's</a>
+    and cloud agnostic <a href="https://github.com/ServiceStack/ServiceStack.Aws">ServiceStack.Aws</a> and
+    <a href="https://github.com/ServiceStack/ServiceStack.Azure">ServiceStack.Azure</a> as seen below with the same script
+    below performs adhoc queries against an AWS RDS PostgreSQL managed database and S3 File Storage and an Azure SQL Server 
+    Database and Azure Blob File Storage:
+</p>
+
+<img src="https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/sharpscript/watch-aws-azure.gif" alt="">
+
+<h4>Live Transformations</h4>
+
+<p>
+    The <em>watch</em> mode enables an live REPL which serves as an interactive explanatory playground 
+    that's especially useful in scripts where you want instant feedback like viewing the results of 
+    <a href="/docs/sharp-scripts#live-transformations">live transformations</a>:
+</p>
+
+<img src="https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/sharpscript/livepad.gif" alt="">
+
 <h3>Sharp Apps</h3>
 
 <p>
-    One use-case made possible by #Script we're extremely excited about is <a href="/docs/sharp-apps">Sharp Apps</a> - a new approach to 
+    One use-case made possible by <em>#Script</em> we're extremely excited about is <a href="/docs/sharp-apps">Sharp Apps</a> - a new approach to 
     dramatically simplify .NET Web App development and provide the most productive development experience possible. 
 </p>
 
 <p>
-    Sharp Apps leverages #Script to develop entire content-rich, data-driven websites in a pure live development model 
+    <a href="/docs/sharp-apps">Sharp Apps</a> leverages <em>#Script</em> to develop entire content-rich, data-driven websites in a pure live development model 
     without needing to write any C#, compile projects or manually refresh pages. Checkout the Spirals Sharp App below 
     for a glimpse of the Live Development experience available:
 </p>
@@ -137,9 +99,9 @@
 <h4>Pure Cloud Apps</h4>
 
 <p>
-    Sharp Apps also enable the development of <a href="/docs/sharp-apps#pure-cloud-apps">Pure Cloud Apps</a> where the same SharpApp 
-    can be developed and run entirely on <em>AWS S3 and RDS</em> or <em>Azure Blob Storage and SQL Server</em> by just changing
-    its <em>app.settings</em>.
+    <a href="/docs/sharp-apps">Sharp Apps</a> also enable the development of <a href="/docs/sharp-apps#pure-cloud-apps">Pure Cloud Apps</a> 
+    where the same SharpApp can be developed and run entirely on <em>AWS S3 and RDS</em> or <em>Azure Blob Storage and SQL Server</em> 
+    by just changing its <em>app.settings</em>.
 </p>
 
 <h3>Learn #Script</h3>
@@ -160,6 +122,71 @@
 </p>
 
 {{ "linq-preview" | partial({ rows: 7, example: "linq01" }) }}
+
+<h5 id="language">Language</h5>
+
+<p>
+    The language itself a familiar combination of
+    <a href="/docs/expression-viewer">JavaScript expressions</a> contained within Template Expressions popularized in    
+    <a href="https://vuejs.org/v2/guide/filters.html">Vue.js filters</a> and 
+    <a href="https://angular.io/guide/template-syntax#template-expression-operators">Angular's Template Expressions</a>
+    whilst statements adopt <a href="/docs/blocks">Handlebars block helpers</a> syntax. The language is also highly extensible which is pre-configured
+    <a href="/docs/default-scripts">comprehensive suite of safe methods</a> and blocks by default, but are all registered via its 
+    rich plugin functionality which can be completely removed or "shadowed" (aka overridden) where it could be used to form the basis of your
+    own completely different DSL.
+</p>
+
+<h5 id="ecosystem">Ecosystem</h5>
+
+<p>
+    In addition to the language, #Script includes a surrounding ecosystem of rich functionality adapting #Script
+    to power a number of fun and exciting scenarios. E.g. Scripts are lazily loaded from its Virtual File System
+    which can be configured to use any of the <a href="https://docs.servicestack.net/virtual-file-system">available Virtual File Systems</a>
+    and is what enables <a href="/docs/sharp-apps#pure-cloud-apps">Pure Cloud Apps</a> where <b>entire</b> Sharp Apps could be hosted within
+    your AWS S3 Bucket or Azure Blob Storage.
+</p>
+
+<h5 id="dynamic">Dynamic</h5>
+
+<p>
+    It's small, lightweight footprint and built-in <a href="/docs/hot-reloading">Hot Reloading</a>
+    provides a fun, clean and productive alternative to MVC Razor that's easily 
+    <a href="/docs/sharp-pages">integrated into any web framework</a> and runs identically in 
+    <a href="/docs/sharp-pages#runs-everywhere">every platform ServiceStack runs on</a>, as well as
+    within <a href="/mvc-netcore#aspnet-mvc--templates-demo">ASP.NET MVC</a> and <a href="/docs/mvc-netcore">ASP.NET Core MVC</a> 
+    Controllers - in all cases, using the same <a href="/docs/introduction#instant-startup">high-performance implementation</a>    
+    to asynchronously write to a forward-only OutputStream for max performance and maximum potential reuse of your Source Code.
+</p>
+
+<p>
+    <em>#Script</em> scripts are lazily loaded and <a href="/docs/introduction#late-bound">late-bound</a> for Instant Startup, doesn't require any 
+    pre-compilation, coupling to any external configuration files, build tools, designer tooling or have any special deployment requirements.
+    It can be used as a general purpose scripting or templating language to generate <a href="/docs/page-formats">any text format</a> 
+    and includes built-in support for <em>.html</em>.
+</p>
+
+<h5 id="encapsulated">Encapsulated</h5>
+
+<p>
+    Similar to <a href="https://vuejs.org/v2/guide/components.html">Vue.js Components</a>, Sharp Script's are evaluated in an 
+    <a href="/docs/sandbox">Encapsulated Sandbox</a> that enables fine-grained control over exactly what functionality and instances 
+    are available to different Scripts. They're pre-configured with a comprehensive suite of safe 
+    <a href="/docs/default-scripts">Default Scripts</a> which when running in trusted contexts can easily be granted access to 
+    <a href="/docs/filters-reference">enhanced functionality</a>.
+</p>
+
+<h5 id="simple">Simple</h5>
+
+<p>
+    <em>#Script</em> is designed to be incrementally adoptable where its initial form is
+    <a href="/docs/sharp-apps#ideal-for-web-designers-and-content-authors">ideal for non-programmers</a>, 
+    that can gradually adopt more power and functionality when needed where they can leverage existing Services or MVC Controllers 
+    to enable an 
+    <a href="/docs/model-view-controller">MVC programming model</a> or have <em>.html</em> pages upgraded to use 
+    <a href="/docs/code-pages">Code Pages</a> where they can utilize the full unlimited power of the C# programming language to 
+    enable precise control over the rendering of pages and partials. Code pages take precedence and are interchangeable wherever 
+    normal <em>.html</em> pages are requested making them a non-invasive alternative whenever advanced functionality is required.
+</p>
 
 <h3>Free!</h3>
 

@@ -232,7 +232,9 @@ caption {
 }
 
 ::-webkit-scrollbar { width:7px; height:5px }
-::-webkit-scrollbar-thumb { background-color:#ccc; }
+::-webkit-scrollbar-thumb { 
+    background-color: rgba(204, 204, 204, .2);
+}
 
 @media (max-width: 1366px) {
     #content {
