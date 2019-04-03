@@ -65,7 +65,7 @@ Then you can run <em>web list</em> to see which apps are available to install:
 <pre class="sh"><code>$ web list</code></pre>
 
 <p>
-    By default this will list all <a href="https://github.com/NetCoreWebApps">NetCoreWebApps</a> available, ordered by popularity: 
+    By default this will list all <a href="https://github.com/sharp-apps">sharp-apps</a> available, ordered by popularity: 
 </p>
 
 <pre class="sh"><code>1. redis           Redis Admin Viewer developed as Vue Client Single Page App
@@ -73,17 +73,17 @@ Then you can run <em>web list</em> to see which apps are available to install:
 3. chat            Highly extensible App with custom AppHost leveraging OAuth + SSE for real-time Chat
 4. plugins         Extend Sharp Apps with Plugins, Filters, ServiceStack Services and other C# extensions
 5. blog            Minimal multi-user Twitter OAuth blogging platform that creates living powerful pages
-6. rockwind-aws    Rockwind Cloud Web App on AWS
-7. rockwind-azure  Rockwind Cloud Web App on Azure
+6. rockwind-aws    Rockwind Cloud Sharp App on AWS
+7. rockwind-azure  Rockwind Cloud Sharp App on Azure
 8. redis-html      Redis Admin Viewer developed as server-generated HTML Website
 9. spirals         Explore and generate different Spirals with SVG
-10. rockwind        Web App combining multi-layout Rockstars website + data-driven Northwind Browser
+10. rockwind       Sharp App combining multi-layout Rockstars website + data-driven Northwind Browser
 
 Usage: web install &lt;name&gt;</code></pre>
 
 <p>
     Where any of the apps can be installed by specifying the <b>name</b>, e.g. 
-    <a href="https://github.com/NetCoreWebApps/spirals">spirals</a> can be installed with:
+    <a href="https://github.com/sharp-apps/spirals">spirals</a> can be installed with:
 </p>
 
 <pre class="sh"><code>$ web install spirals</code></pre>
@@ -95,7 +95,7 @@ Usage: web install &lt;name&gt;</code></pre>
 <pre class="sh"><code>$ cd spirals && web</code></pre>
 
 <p>
-    Each Web App can also be run as a 
+    Each Sharp App can also be run as a 
     <a href="https://docs.servicestack.net/netcore-windows-desktop">.NET Core Windows Desktop App</a>
     by installing the <em>app</em> dotnet tool:
 </p>
@@ -201,8 +201,8 @@ Usage: web install &lt;name&gt;</code></pre>
 </p>
 
 <ul>
-    <li><a href="https://github.com/NetCoreWebApps/rockwind-aws">rockwind-aws</a></li>
-    <li><a href="https://github.com/NetCoreWebApps/rockwind-azure">rockwind-azure</a></li>
+    <li><a href="https://github.com/sharp-apps/rockwind-aws">rockwind-aws</a></li>
+    <li><a href="https://github.com/sharp-apps/rockwind-azure">rockwind-azure</a></li>
 </ul>
 
 <h3 id="about-bare-webapp">About Bare WebApp</h3>
@@ -220,9 +220,9 @@ Usage: web install &lt;name&gt;</code></pre>
 
 <p>
     The benefits over using a static website is improved maintenance
-    as you can extract and use its common <a href="https://github.com/NetCoreWebApps/Bare/blob/master/_layout.html">_layout.html</a>
+    as you can extract and use its common <a href="https://github.com/sharp-apps/Bare/blob/master/_layout.html">_layout.html</a>
     instead of having it duplicated in each page. 
-    The <a href="https://github.com/NetCoreWebApps/Bare/blob/master/menu.html">menu.html</a> partial also makes menu items
+    The <a href="https://github.com/sharp-apps/Bare/blob/master/menu.html">menu.html</a> partial also makes menu items
     easier to maintain by just adding an entry in the JavaScript object literal. The dynamic menu also takes care of highlighting the active menu item.
 </p>
 
@@ -247,7 +247,7 @@ title: About Us
     with GUI HTML designers.
 </p>
 
-<h5><a href="https://github.com/NetCoreWebApps/Bare/blob/master/app.settings">app.settings</a></h5>
+<h5><a href="https://github.com/sharp-apps/Bare/blob/master/app.settings">app.settings</a></h5>
 
 <p>
     Below is the <em>app.settings</em> for a Basic App, with <b>contentRoot</b> being the only setting required as the
@@ -280,14 +280,14 @@ webRoot ~/../bare</code></pre>
 <p>
     In addition to the templates there's a number of Sharp Apps to illustrate the various features available and to showcase the different 
     kind of Web Apps that can easily be developed. The source code for each app is available either individually from 
-    <a href="https://github.com/NetCoreWebApps">github.com/NetCoreWebApps</a>. 
+    <a href="https://github.com/sharp-apps">github.com/sharp-apps</a>. 
 </p>
 
 <h3>Redis HTML</h3>
 <div class="source">
     <em>web install redis-html</em> -
     <a href="http://redis-html.web-app.io">redis-html.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/redis-html">NetCoreWebApps/redis-html</a>
+    <a href="https://github.com/sharp-apps/redis-html">sharp-apps/redis-html</a>
 </div>
 
 <p>
@@ -324,10 +324,10 @@ webRoot ~/../bare</code></pre>
 <p>
     The nice thing about generating HTML is that it's the one true constant in Web development that will always be there.
     The entire functionality for the Redis Web App is contained in a single
-    <a href="https://github.com/NetCoreWebApps/redis-html/blob/master/index.html">/redis-html/app/index.html</a> which includes
+    <a href="https://github.com/sharp-apps/redis-html/blob/master/index.html">/redis-html/app/index.html</a> which includes
     all Template and JavaScript Source Code in <b>&lt; 200 lines</b> which also includes all as server logic as it doesn't rely on any 
     back-end Services and just uses the <a href="/docs/redis-scripts">Redis Scripts</a> to interface with Redis directly.
-    The <a href="https://github.com/NetCoreWebApps/redis-html/blob/master/index.html">source code</a> also serves as a good 
+    The <a href="https://github.com/sharp-apps/redis-html/blob/master/index.html">source code</a> also serves as a good 
     demonstration of the declarative coding style that #Script encourages that in addition to being highly-readable requires orders 
     of magnitude less code than our previous Redis JavaScript SPA's with a comparable feature-set.
 </p>
@@ -338,7 +338,7 @@ webRoot ~/../bare</code></pre>
     that would be required to convert the existing JavaScript Apps to a use different JavaScript fx.
 </p>
 
-<h5><a href="https://github.com/NetCoreWebApps/redis-html/blob/master/app.settings">app.settings</a></h5>
+<h5><a href="https://github.com/sharp-apps/redis-html/blob/master/app.settings">app.settings</a></h5>
 
 <p>
     The <em>app.settings</em> for Redis is similar to Web App Starter above except it adds a <em>redis.connection</em>
@@ -357,7 +357,7 @@ redis.connection localhost:6379</code></pre>
 <div class="source">
     <em>web install redis</em> -
     <a href="http://redis.web-app.io">redis.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/Redis">NetCoreWebApps/Redis</a>
+    <a href="https://github.com/sharp-apps/Redis">sharp-apps/Redis</a>
 </div>
 
 <p>
@@ -372,7 +372,7 @@ redis.connection localhost:6379</code></pre>
     where the UI has been extracted into isolated Vue components utilizing 
     <a href="https://vuejs.org/v2/guide/components.html#X-Templates">Vue X-Templates</a> to render the App on the client where 
     all Redis Vue's functionality is contained within the
-    <a href="https://github.com/NetCoreWebApps/Redis/blob/master/index.html">Redis/app/index.html</a> page.     
+    <a href="https://github.com/sharp-apps/Redis/blob/master/index.html">Redis/app/index.html</a> page.     
 </p>
 
 <a href="http://redis.web-app.io"><img src="/assets/img/screenshots/redis.png" alt="Redis Vue WebApp Screenshot"></a>
@@ -385,8 +385,8 @@ redis.connection localhost:6379</code></pre>
     dynamic web page when needed. 
 </p>
 <p>
-    The containing <a href="https://github.com/NetCoreWebApps/Redis/blob/master/_layout.html">_layout.html</a>
-    page can be separated from the <a href="https://github.com/NetCoreWebApps/Redis/blob/master/index.html">index.html</a> page 
+    The containing <a href="https://github.com/sharp-apps/Redis/blob/master/_layout.html">_layout.html</a>
+    page can be separated from the <a href="https://github.com/sharp-apps/Redis/blob/master/index.html">index.html</a> page 
     that contains the App's functionality, where it's able to extract the <em>title</em> of the page and embed it in the 
     HTML <em>&lt;head/&gt;</em> as well as embed the page's <em>&lt;script /&gt;</em> in its optimal location at the bottom of the 
     HTML <em>&lt;body/&gt;</em>, after the page's blocking script dependencies:
@@ -402,9 +402,9 @@ redis.connection localhost:6379</code></pre>
 
 <p>
     Where it uses the more verbose and developer-friendly 
-    <a href="https://github.com/NetCoreWebApps/Redis/blob/master/assets/js/vue.js">vue.js</a>
+    <a href="https://github.com/sharp-apps/Redis/blob/master/assets/js/vue.js">vue.js</a>
     during development whilst using the production optimized 
-    <a href="https://github.com/NetCoreWebApps/Redis/blob/master/assets/js/vue.min.js">vue.min.js</a>
+    <a href="https://github.com/sharp-apps/Redis/blob/master/assets/js/vue.min.js">vue.min.js</a>
     for deployments. So despite avoiding the complexity tax of an npm-based build system it still gets some of its benefits
     like conditional deployments and effortless <a href="/docs/hot-reloading">hot reloading</a>.
 </p>
@@ -412,7 +412,7 @@ redis.connection localhost:6379</code></pre>
 <h4>Server Pages</h4>
 
 <p>
-    Whilst most of <a href="https://github.com/NetCoreWebApps/Redis/blob/master/index.html">index.html</a> is a static Vue 
+    Whilst most of <a href="https://github.com/sharp-apps/Redis/blob/master/index.html">index.html</a> is a static Vue 
     app, #Script is leveraged to generate the body of the <em>&lt;redis-info/&gt;</em> Component on the initial home page render:
 </p>
 
@@ -428,7 +428,7 @@ redis.connection localhost:6379</code></pre>
 <p>
     Another area #Script is used is to handle the HTTP POST where it calls the <em>redisChangeConnection</em> filter to change 
     the current Redis connection before rendering the 
-    <a href="https://github.com/NetCoreWebApps/Redis/blob/master/connection-info.html">connection-info.html</a> partial with the 
+    <a href="https://github.com/sharp-apps/Redis/blob/master/connection-info.html">connection-info.html</a> partial with the 
     current connection info:
 </p>
 
@@ -441,7 +441,7 @@ redis.connection localhost:6379</code></pre>
     <a href="/docs/sharp-apis">API Pages</a>:
 </p>
 
-<h5><a href="https://github.com/NetCoreWebApps/Redis/blob/master/api/search.html">search.html</a></h5>
+<h5><a href="https://github.com/sharp-apps/Redis/blob/master/api/search.html">search.html</a></h5>
 
 <p>
     Called when searching for Redis keys where the query is forwarded to the <em>redisSearchKeys</em> filter:
@@ -449,7 +449,7 @@ redis.connection localhost:6379</code></pre>
 
 {{ 'gfm/sharp-apps/10.md' | githubMarkdown }}
 
-<h5><a href="https://github.com/NetCoreWebApps/Redis/blob/master/api/call.html">call.html</a></h5>
+<h5><a href="https://github.com/sharp-apps/Redis/blob/master/api/call.html">call.html</a></h5>
 
 <p>
     Called to execute an arbitrary Redis command on the connected instance, with the response from Redis is returned as a 
@@ -476,7 +476,7 @@ redis.connection localhost:6379</code></pre>
 <div class="source">
     <em>web install rockwind</em> -
     <a href="http://rockwind-sqlite.web-app.io">rockwind-sqlite.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/Rockwind">NetCoreWebApps/Rockwind</a>
+    <a href="https://github.com/sharp-apps/Rockwind">sharp-apps/Rockwind</a>
 </div>
 
 <p>
@@ -489,13 +489,13 @@ redis.connection localhost:6379</code></pre>
 <h4>Rockstars</h4>
 
 <p>
-    <a href="https://github.com/NetCoreWebApps/Rockwind/tree/master/rockstars">/rockstars</a> is an 
+    <a href="https://github.com/sharp-apps/Rockwind/tree/master/rockstars">/rockstars</a> is an 
     example of a Content Website that itself maintains multiple sub sections with their own layouts -
-    <a href="https://github.com/NetCoreWebApps/Rockwind/tree/master/rockstars/alive">/rockstars/alive</a> 
+    <a href="https://github.com/sharp-apps/Rockwind/tree/master/rockstars/alive">/rockstars/alive</a> 
     for living Rockstars and 
-    <a href="https://github.com/NetCoreWebApps/Rockwind/tree/master/rockstars/dead">/rockstars/dead</a>
+    <a href="https://github.com/sharp-apps/Rockwind/tree/master/rockstars/dead">/rockstars/dead</a>
     for the ones that have died. Each Rockstar maintains their own encapsulated
-    <a href="https://github.com/NetCoreWebApps/Rockwind/tree/master/rockstars/alive/grohl">mix of HTML, markdown content and splash image</a>
+    <a href="https://github.com/sharp-apps/Rockwind/tree/master/rockstars/alive/grohl">mix of HTML, markdown content and splash image</a>
     that intuitively uses the closest <em>_layout.html</em>, <em>content.md</em> and <em>splash.jpg</em> from the page they're
     referenced from. This approach makes it easy to move entire sub sections over by just moving a folder and it will automatically
     use the relevant layout and partials of its parent.
@@ -506,13 +506,13 @@ redis.connection localhost:6379</code></pre>
 <h4>Northwind</h4>
 
 <p>
-    <a href="https://github.com/NetCoreWebApps/Rockwind/tree/master/northwind">/northwind</a> is an example of 
+    <a href="https://github.com/sharp-apps/Rockwind/tree/master/northwind">/northwind</a> is an example of 
     a dynamic UI for a database containing a 
     <a href="http://rockwind-sqlite.web-app.io/northwind/customers?country=Germany">form to filter results</a>, multi-nested 
     <a href="http://rockwind-sqlite.web-app.io/northwind/customer?id=ALFKI">detail pages</a> and 
     <a href="http://rockwind-sqlite.web-app.io/northwind/order?id=10643">deep-linking</a> for quickly navigating between 
     referenced data. #Script is also a great solution for rapidly developing Web APIs where the 
-    <a href="https://github.com/NetCoreWebApps/Rockwind/blob/master/api/customers.html">/api/customers.html</a>
+    <a href="https://github.com/sharp-apps/Rockwind/blob/master/api/customers.html">/api/customers.html</a>
     API Page below:
 </p>
 
@@ -688,7 +688,7 @@ defaultFileCacheExpirySecs     60</code></pre>
     multiple databases by using the 
     <a href="/docs/filters-reference?nameContains=sql&amp;tab=db-scripts"><em>sql*</em> DB Filters</a> to avoid using RDBMS-specific
     SQL syntax. The 
-    <a href="https://github.com/NetCoreWebApps/Rockwind/blob/master/northwind/customer.html">/northwind/customer.html</a>
+    <a href="https://github.com/sharp-apps/Rockwind/blob/master/northwind/customer.html">/northwind/customer.html</a>
     contains a good example containing a number of things to watch out for:
 </p>
 
@@ -708,7 +708,7 @@ defaultFileCacheExpirySecs     60</code></pre>
 <div class="source">
     <em>web install rockwind-aws</em> -
     <a href="http://rockwind-aws.web-app.io">rockwind-aws.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/rockwind-aws">NetCoreWebApps/rockwind-aws</a>
+    <a href="https://github.com/sharp-apps/rockwind-aws">sharp-apps/rockwind-aws</a>
 </div>
 
 <p>
@@ -755,7 +755,7 @@ defaultFileCacheExpirySecs     60</code></pre>
 
 <h4 id="pure-cloud-apps">Pure Cloud Apps</h4>
 
-<h5><a href="https://github.com/NetCoreWebApps/rockwind-aws/blob/master/app.settings">rockwind-aws/app.settings</a></h5>
+<h5><a href="https://github.com/sharp-apps/rockwind-aws/blob/master/app.settings">rockwind-aws/app.settings</a></h5>
 
 <p>
     The AWS settings shows an example of this where every external resource 
@@ -785,18 +785,18 @@ defaultFileCacheExpirySecs     60</code></pre>
     whilst <em>defaultFileCacheExpirySecs</em> specifies how long to cache files like <em>content.md</em> for.
 </p>
 
-<h5><a href="https://github.com/NetCoreWebApps/rockwind-aws/blob/master/Dockerfile">DockerFile</a></h5>
+<h5><a href="https://github.com/sharp-apps/rockwind-aws/blob/master/Dockerfile">DockerFile</a></h5>
 
 <p>
     Deployments are also greatly simplified as all that's needed is to deploy the WebApp binary and app.settings of your Cloud App,
     e.g. here's the DockerFile for <a href="http://rockwind-aws.web-app.io">rockwind-aws.web-app.io</a> - deployed to AWS ECS 
-    using the deployment scripts in <a href="https://github.com/NetCoreWebApps/rockwind-aws">rockwind-aws</a> and following our 
+    using the deployment scripts in <a href="https://github.com/sharp-apps/rockwind-aws">rockwind-aws</a> and following our 
     <a href="https://docs.servicestack.net/deploy-netcore-docker-aws-ecs">.NET Core Docker Deployment Guideline</a>:
 </p>
 
 {{ 'gfm/sharp-apps/03.md' | githubMarkdown }}
 
-<h5><a href="https://github.com/NetCoreWebApps/rockwind-azure/blob/master/app.settings">rockwind-azure/app.settings</a></h5>
+<h5><a href="https://github.com/sharp-apps/rockwind-azure/blob/master/app.settings">rockwind-azure/app.settings</a></h5>
 
 <p>
     We can also create Azure Cloud Apps in the same we've done for AWS above, which runs the same 
@@ -822,7 +822,7 @@ defaultFileCacheExpirySecs     60</code></pre>
 <div class="source">
     <em>web install plugins</em> -
     <a href="http://plugins.web-app.io">plugins.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/Plugins">NetCoreWebApps/Plugins</a>
+    <a href="https://github.com/sharp-apps/Plugins">sharp-apps/Plugins</a>
 </div>
 
 <p>
@@ -855,7 +855,7 @@ defaultFileCacheExpirySecs     60</code></pre>
 <p>
     <a href="https://docs.servicestack.net/plugins">ServiceStack Plugins</a> can be added to your App by 
     listing it's Type Name in the <em>features</em> config entry in 
-    <a href="https://github.com/NetCoreWebApps/Plugins/tree/master/app.settings">app.settings</a>:
+    <a href="https://github.com/sharp-apps/Plugins/tree/master/app.settings">app.settings</a>:
 </p>
 
 <pre class="settings"><code>debug true
@@ -950,11 +950,11 @@ CustomPlugin { ShowProcessLinks: true }
 <div class="source">
     <em>web install chat</em> -
     <a href="http://chat.web-app.io">chat.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/Chat">NetCoreWebApps/Chat</a>
+    <a href="https://github.com/sharp-apps/Chat">sharp-apps/Chat</a>
 </div>
 
 <p>
-    <a href="https://github.com/NetCoreWebApps/Chat/tree/master/app">/chat</a> is an example of the ultimate form 
+    <a href="https://github.com/sharp-apps/Chat/tree/master/app">/chat</a> is an example of the ultimate form 
     of extensibility where instead of just being able to add Services, Filters and Plugins, etc. You can add your entire 
     <em>AppHost</em> which Sharp Apps will use instead of its own. This vastly expands the use-cases that can be built with 
     Sharp Apps as it gives you complete fine-grained control over how your App is configured.
@@ -968,7 +968,7 @@ CustomPlugin { ShowProcessLinks: true }
     For <a href="http://chat.web-app.io">chat.web-app.io</a> we've taken a copy of the existing .NET Core 2.1 
     <a href="https://github.com/NetCoreApps/Chat">Chat App</a> and moved its C# code to
     <a href="https://github.com/ServiceStack/dotnet-app/tree/master/src/example-plugins/Chat">/example-plugins/Chat</a>
-    and its files to <a href="https://github.com/NetCoreWebApps/Chat/tree/master/app">/apps/chat</a> 
+    and its files to <a href="https://github.com/sharp-apps/Chat/tree/master/app">/apps/chat</a> 
     where it can be developed like any other Web App except it utilizes the Chat AppHost and implementation in the 
     <a href="https://github.com/ServiceStack/dotnet-app/blob/master/src/example-plugins/Chat/Program.cs">SelfHost Chat App</a>.
 </p>
@@ -977,8 +977,8 @@ CustomPlugin { ShowProcessLinks: true }
     Customizations from the original 
     <a href="https://github.com/NetCoreApps/Chat/blob/master/src/Chat/Startup.cs">.NET Core Chat implementation</a> 
     includes removing MVC and Razor dependencies and configuration, extracting its 
-    <a href="https://github.com/NetCoreWebApps/Chat/tree/master/_layout.html">_layout.html</a> and 
-    converting <a href="https://github.com/NetCoreWebApps/Chat/tree/master/index.html">index.html</a>
+    <a href="https://github.com/sharp-apps/Chat/tree/master/_layout.html">_layout.html</a> and 
+    converting <a href="https://github.com/sharp-apps/Chat/tree/master/index.html">index.html</a>
     to use #Script from its original 
     <a href="https://github.com/NetCoreApps/Chat/blob/master/src/Chat/wwwroot/default.cshtml">default.cshtml</a>.
     It's also been enhanced with the ability to evaluate scripts from the Chat window, as seen in the screenshot above.
@@ -1021,7 +1021,7 @@ oauth.github.ClientSecret 42c8db8d0ca72a0ef202e0c197d1377670c990f4
 
 <p>
     After the back-end has been implemented we can build and copy the compiled <b>Chat.dll</b> into the Chat's 
-    <a href="https://github.com/NetCoreWebApps/Chat/tree/master/plugins">/plugins</a> folder where 
+    <a href="https://github.com/sharp-apps/Chat/tree/master/plugins">/plugins</a> folder where 
     we can take advantage of the improved development experience for rapidly developing its UI.
 </p>
 
@@ -1029,7 +1029,7 @@ oauth.github.ClientSecret 42c8db8d0ca72a0ef202e0c197d1377670c990f4
 <div class="source">
     <em>web install blog</em> -
     <a href="http://blog.web-app.io">blog.web-app.io</a> -
-    <a href="https://github.com/NetCoreWebApps/Blog">NetCoreWebApps/Blog</a>
+    <a href="https://github.com/sharp-apps/Blog">sharp-apps/Blog</a>
 </div>
 
 {{ 'gfm/sharp-apps/14.md' | githubMarkdown }}
