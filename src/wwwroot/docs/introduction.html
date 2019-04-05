@@ -28,11 +28,11 @@ order: 2
 
 {{ 'gfm/introduction/02.md' | githubMarkdown }}
 
-
 <p>
     Scripts only have access to script methods, blocks and arguments defined within its Context, which for an empty Context are
     the comprehensive suite of safe <a href="/docs/default-scripts">Default Scripts</a> and <a href="/docs/html-scripts">HTML Scripts</a>.
 </p>
+
 
 <h5 id="rendering-pages">Rendering Script Pages</h5>
 
@@ -50,6 +50,72 @@ order: 2
 </p>
 
 {{ 'gfm/introduction/10.md' | githubMarkdown }}
+
+
+<h3 id="net-usage">Usage in .NET</h3>
+
+<p>
+    To evaluate <em>#Script</em> in .NET you'll first create the <em>ScriptContext</em> containing all functionality and features 
+    your Scripts have access to:
+</p>
+
+{{ 'gfm/introduction/11.md' | githubMarkdown }}
+
+<p>
+    Where you can customize the pure <a href="/docs/sandbox">sandboxed</a> <em>ScriptContext</em> your Script is executed
+    within by extending it with:
+</p>
+
+<ul>
+    <li>
+        <a href="/docs/arguments">Arguments</a>
+    </li>
+    <li>
+        <a href="/docs/methods">Script Methods</a>
+    </li>
+    <li>
+        <a href="/docs/blocks">Script Blocks</a>
+    </li>
+    <li>
+        <a href="/docs/transformers">Filter Transformers</a>
+    </li>
+    <li>
+        <a href="/docs/script-plugins">Script Plugins</a>
+    </li>
+    <li>
+        <a href="/docs/page-formats">Page Formats</a>
+    </li>
+    <li>
+        <a href="/docs/plugins">Plugins</a>
+    </li>
+</ul>
+
+<h4>Autowired using ScriptContext IOC</h4>
+
+<p>
+    <em>ScanTypes</em> is useful for Autowiring instances of scripts created using ScriptContext's configured IOC 
+    where they're also injected with any registered IOC dependencies and can be used to autowire 
+    <a href="/docs/methods">ScriptMethods</a>, 
+    <a href="/docs/blocks">ScriptBlocks</a>  and 
+    <a href="/docs/code-pages">Code Pages</a>:
+</p>
+
+{{ 'gfm/methods/07.md' | githubMarkdown }}
+
+<p>
+    When the <em>ScriptContext</em> is initialized it will go through each Type and create an autowired instance of each Type
+    and register them in the <em>ScriptMethods</em>, <em>ScriptBlocks</em> and <em>CodePages</em> collections. 
+</p>
+
+<p> 
+    An alternative to registering a single Type is to register an entire Assembly, e.g:    
+</p>
+
+{{ 'gfm/methods/08.md' | githubMarkdown }}
+
+<p>
+    Where it will search each Type in the Assembly for Script Methods and automatically register them.
+</p>
 
 <h4>Multi page Scripts</h4>
 
