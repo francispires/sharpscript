@@ -40,6 +40,19 @@ order: 14
     for the RDBMS that's registered.
 </p>
 
+<h3>Opening different connections</h3>
+
+<p>
+    By default the <em>DbScripts</em> will use the registered <em>IDbConnectionFactory</em> in the IOC or when 
+    <a href="https://docs.servicestack.net/multitenancy">Multi tenancy</a> is configured it will use the connection configured for that request.
+</p>
+
+<p>
+    You can also specify to use a different DB connection using the <em>namedConnection</em> and <em>connectionString</em> arguments:
+</p>
+
+{{ 'gfm/db-scripts/03.md' | githubMarkdown }}
+
 <h3>DB Filter Examples</h3>
 
 <p>
