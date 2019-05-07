@@ -5,7 +5,7 @@ export IMAGE_NAME=netcoreapps-sharpscript
 export IMAGE_VERSION=latest
 
 export AWS_DEFAULT_REGION=us-east-1
-export AWS_ECS_CLUSTER_NAME=cluster
+export AWS_ECS_CLUSTER_NAME=default
 export AWS_VIRTUAL_HOST=quiz.francispires.com.br
 export LETSENCRYPT_HOST=$AWS_VIRTUAL_HOST
 export LETSENCRYPT_EMAIL=lets@francispires.com.br
